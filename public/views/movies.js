@@ -23,9 +23,10 @@ define([
         },
 
         recents: function() {
+            var moviesdata = yapp.Storage.get("movies:recents") || [];
             this.add({
-                list: [],
-                n: 0
+                list: moviesdata,
+                n: _.size(moviesdata)
             });
         },
     });
@@ -36,7 +37,7 @@ define([
         template: "movie.html",
         events: {
             "click .cover": "open",
-            "click .action": "run"
+            "click .play": "play"
         },
         templateContext: function() {
             return {
@@ -65,7 +66,7 @@ define([
         },
 
         /* Default action */
-        run: function(e) {
+        play: function(e) {
             if (e != null) e.preventDefault();
             this.model.play();
         },
@@ -201,7 +202,7 @@ define([
         actionSelection: function() {
             var item = this.activeItem();
             if (item == null) return this.selectionRight();
-            item.run();
+            item.play();
         }
     }, {
         Collection: Movies,

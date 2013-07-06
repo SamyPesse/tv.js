@@ -13,6 +13,7 @@ define([
         
         /* Play the movie */
         play: function() {
+            this.addToRecents();
             yapp.History.navigate("play/:id", {
                 "id": this.get("id")
             });
@@ -29,6 +30,16 @@ define([
                 this.set(data);
             }, this));
         },
+
+        /* Add movie to recents */
+        addToRecents: function() {
+            var key = "movies:recents";
+            var recents = yapp.Storage.get(key) || [];
+            recents.unshift(this.toJSON());
+            recents = recents.slice(0, 20);
+            yapp.Storage.set(key, recents);
+            return this;
+        }
     });
 
     return Movie;
