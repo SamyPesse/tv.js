@@ -13,15 +13,15 @@ define([
         
         /* Play the movie */
         play: function() {
-            this.addToRecents();
-            yapp.History.navigate("play/:id", {
-                "id": this.get("id")
-            });
-            /*return yapp.Requests.getJSON("/api/movie/play/"+this.get("id")).done(_.bind(function(data) {
+            this.addToRecents();  
+            return yapp.Requests.getJSON("/api/movie/play/"+this.get("id")).done(_.bind(function(data) {
                 this.trigger("play:start");
+                yapp.History.navigate("play/:id", {
+                    "id": this.get("id")
+                });
             }, this), _.bind(function() {
                 this.trigger("play:fail");
-            }, this));*/
+            }, this));
         },
 
         /* Get by id */
@@ -36,6 +36,11 @@ define([
             var key = "movies:recents";
             var recents = yapp.Storage.get(key) || [];
             recents.unshift(this.toJSON());
+
+            recents = _.uniq(recents, false, function(recent) {
+                return recent.id;
+            });
+
             recents = recents.slice(0, 20);
             yapp.Storage.set(key, recents);
             return this;

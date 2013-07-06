@@ -10,9 +10,9 @@ define([
 
     logging.log("Connexion to "+url);
     Updates.socket = io.connect(url);
-    Updates.socket.on('downloading', function(data) {
-        logging.log("donwload state ", data);
-        Updates.trigger("downloading:"+data.id, data);
+    Updates.socket.on('stats', function(data) {
+        logging.log("streaming stats ", data);
+        Updates.trigger("streaming:stats", data);
     });
     Updates.socket.on('error', function(data) {
         logging.error("error in socket.io")

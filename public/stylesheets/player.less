@@ -11,25 +11,82 @@
         display: block;
     }
 
-    .bar {
+    .video {
         position: absolute;
-        bottom: 20px;
-        right: 40px;
-        left: 40px;
-        height: 10px;
-        background: #333;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+        background: #000;
 
-        .inner {
-            position: absolute;
+        video {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .toolbar {
+        position: absolute;
+        z-index: 1;
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+        height: 70px;
+        background: rgba(0, 0, 0, 0.8);
+        .transition(all, .4s);
+
+        &.hide {
+            bottom: -70px;
+        }
+
+        &.top {
             top: 0px;
-            bottom: 0px;
-            left: 0px;
+            bottom: auto;
 
-            &.progress {
-                background: #f1c40f;
+            &.hide {
+                top: -70px;
+                bottom: auto;
             }
-            &.play {
-                background: #3498db;
+        }
+
+        span {
+            position: absolute;
+            bottom: 20px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 30px;
+            font-weight: 100;
+            color: #fff;
+
+            &.duration {
+                right: 20px;
+            }
+
+            &.speed {
+                left: 20px;
+            }
+        }
+
+        .bar {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            left: 40px;
+            height: 10px;
+            background: #333;
+
+            .inner {
+                position: absolute;
+                top: 0px;
+                bottom: 0px;
+                left: 0px;
+
+                &.download {
+                    background: #f1c40f;
+                }
+                &.play {
+                    background: #3498db;
+                }
             }
         }
     }

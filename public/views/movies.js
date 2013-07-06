@@ -2,9 +2,8 @@ define([
     "Underscore",
     "jQuery",
     "yapp/yapp",
-    "utils/navigation",
-    "models/movie"
-], function(_, $, yapp, Navigation, Movie) {
+    "models/movie",
+], function(_, $, yapp, Movie) {
     var logging = yapp.Logger.addNamespace("movies");
 
     // Collection
@@ -88,14 +87,6 @@ define([
 
         initialize: function() {
             MoviesList.__super__.initialize.apply(this, arguments);
-
-            // Navigation
-            Navigation.bind('right', _.bind(this.selectionRight, this));
-            Navigation.bind('left', _.bind(this.selectionLeft, this));
-            Navigation.bind('up', _.bind(this.selectionUp, this));
-            Navigation.bind('down', _.bind(this.selectionDown, this));
-            Navigation.bind('enter', _.bind(this.actionSelection, this));
-
             return this;
         },
 

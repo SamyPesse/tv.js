@@ -38,16 +38,49 @@ require([
 
         initialize: function() {
             Application.__super__.initialize.apply(this, arguments);
-
+            this.page = null;
             this.doSearch = _.debounce(function() {
                 q = this.$(".header .search").val();
                 this.router.navigate("search/:q", {
                     "q": q
                 });
             }, 1000);
-
-            Navigation.bind('esc', _.bind(this.goHome, this));
             return this;
+        },
+
+        finish: function() {
+            var self = this;
+            var only = function(mode, callback, context) {
+                callback = _.bind(callback, context);
+                return function() {
+                    if (self.page == mode) {
+                        callback();
+                    }
+                }
+            };
+            var except = function(mode, callback, context) {
+                callback = _.bind(callback, context);
+                return function() {
+                    if (self.page != mode) {
+                        callback();
+                    }
+                }
+            };
+
+            // esc : return to homepage
+            Navigation.bind('esc', _.bind(this.goHome, this));
+
+            // movies : navigation
+            Navigation.bind('right', except("player", this.components.movies.selectionRight, this.components.movies));
+            Navigation.bind('left', except("player", this.components.movies.selectionLeft, this.components.movies));
+            Navigation.bind('up', except("player", this.components.movies.selectionUp, this.components.movies));
+            Navigation.bind('down', except("player", this.components.movies.selectionDown, this.components.movies));
+            Navigation.bind('enter', except("player", this.components.movies.actionSelection, this.components.movies));
+
+            // player
+            Navigation.bind("space", only("player", this.components.player.togglePlay,  this.components.player));
+
+            return Application.__super__.finish.apply(this, arguments);
         },
 
         templateContext: function() {
@@ -56,14 +89,17 @@ require([
 
         /* Route 'home' */
         routeHome: function(id) {
+            this.page = "home";
             this.components.player.hide();
             this.components.movies.recents();
             this.$(".header .search").val("");
+            this.focusSearch();
             return this;
         },
 
         /* Route 'search' */
         routeSearch: function(q) {
+            this.page = "search";
             this.components.player.hide();
             this.components.movies.search(q);
             return this;
@@ -71,6 +107,7 @@ require([
 
         /* Route 'search' */
         routePlay: function(id) {
+            this.page = "player";
             this.components.player.show();
             return this;
         },
