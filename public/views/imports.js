@@ -1,5 +1,6 @@
 define([
-    "views/movies"
+    "views/movies",
+    "views/player"
 ], function() {
     return arguments;
 });

@@ -1,6 +1,5 @@
 <div class="header">
     <input type="text" class="search" placeholder="What do you want to watch today ?" />
 </div>
-<div class="list">
-    <%= view.component("list.movies", {}, "movies") %>
-</div>
+<%= view.component("list.movies", {}, "movies") %>
+<%= view.component("player", {}, "player") %>

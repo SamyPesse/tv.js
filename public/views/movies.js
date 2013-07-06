@@ -2,9 +2,9 @@ define([
     "Underscore",
     "jQuery",
     "yapp/yapp",
-    "vendors/mousetrap",
+    "utils/navigation",
     "collections/movies"
-], function(_, $, yapp, Mousetrap, Movies) {
+], function(_, $, yapp, Navigation, Movies) {
     var logging = yapp.Logger.addNamespace("movies");
 
     // List Item View
@@ -66,11 +66,11 @@ define([
 
         initialize: function() {
             MoviesList.__super__.initialize.apply(this, arguments);
-            Mousetrap.bind('right', _.bind(this.selectionRight, this));
-            Mousetrap.bind('left', _.bind(this.selectionLeft, this));
-            Mousetrap.bind('up', _.bind(this.selectionUp, this));
-            Mousetrap.bind('down', _.bind(this.selectionDown, this));
-            Mousetrap.bind('enter', _.bind(this.actionSelection, this));
+            Navigation.bind('right', _.bind(this.selectionRight, this));
+            Navigation.bind('left', _.bind(this.selectionLeft, this));
+            Navigation.bind('up', _.bind(this.selectionUp, this));
+            Navigation.bind('down', _.bind(this.selectionDown, this));
+            Navigation.bind('enter', _.bind(this.actionSelection, this));
             return this;
         },
 
@@ -112,6 +112,21 @@ define([
             return Math.floor(this.$el.width()/274);
         },
 
+        /* Focus on search bar */
+        focusSearch: function() {
+            this.closeAll();
+            this.parent.focusSearch();
+            return this;
+        },
+
+        /* Focus on list */
+        focus: function() {
+            this.closeAll();
+            this.selectionRight();
+            this.parent.blurSearch();
+            return this;
+        },
+
         /* Select next */
         selectionMove: function(d) {
             var items = this.getItemsList();
@@ -123,8 +138,8 @@ define([
             }
             if (_.size(this.items) == 0) return this;
 
-            if (i >= _.size(this.items)) i = 0;
-            if (i < 0) i = _.size(this.items) - 1;
+            if (i >= _.size(this.items)) _.size(this.items) - 1;
+            if (i < 0) return this.focusSearch();
             items[i].open();
             return this;
         },

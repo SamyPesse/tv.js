@@ -1,0 +1,36 @@
+.player {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background: #000;
+    display: none;
+
+    &.active {
+        display: block;
+    }
+
+    .bar {
+        position: absolute;
+        bottom: 20px;
+        right: 40px;
+        left: 40px;
+        height: 10px;
+        background: #333;
+
+        .inner {
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+
+            &.progress {
+                background: #f1c40f;
+            }
+            &.play {
+                background: #3498db;
+            }
+        }
+    }
+}
