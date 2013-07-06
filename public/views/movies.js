@@ -13,9 +13,7 @@ define([
         template: "movie.html",
         events: {
             "click .cover": "open",
-            "click .download": "download",
-            "click .downloading": "downloading",
-            "click .play": "play"
+            "click .action": "run"
         },
         templateContext: function() {
             return {
@@ -40,27 +38,21 @@ define([
             this.$el.removeClass("active");
         },
 
-        /* (action) Download */
-        download: function(e) {
-            e.preventDefault();
-            this.model.download();
-        },
+        /* Default action */
+        run: function(e) {
+            if (e != null) e.preventDefault();
 
-        /* (action) Downloading state */
-        downloading: function(e) {
-            e.preventDefault();
-        },
-
-        /* (action) Play */
-        play: function(e) {
-            e.preventDefault();
-            this.model.play();
+            if (this.model.canPlay()) {
+                this.model.play();
+            } else if (!this.model.isDownloading()) {
+                this.model.download();
+            }
         },
 
         /* Is active */
         isActive: function(e) {
             return this.$el.hasClass("active");
-        }
+        },
     });
 
     // List View
@@ -78,6 +70,7 @@ define([
             Mousetrap.bind('left', _.bind(this.selectionLeft, this));
             Mousetrap.bind('up', _.bind(this.selectionUp, this));
             Mousetrap.bind('down', _.bind(this.selectionDown, this));
+            Mousetrap.bind('enter', _.bind(this.actionSelection, this));
             return this;
         },
 
@@ -92,6 +85,16 @@ define([
                 item.close();
             });
             return this;
+        },
+
+         /* Get index active item */
+        activeItem: function() {
+            return _.reduce(this.items, function(state, item, i) {
+                if (item.isActive()) {
+                    return item;
+                }
+                return state;
+            }, null);
         },
 
         /* Get index active item */
@@ -144,6 +147,13 @@ define([
         /* Select down */
         selectionDown: function() {
             return this.selectionMove(this.itemsByLine());
+        },
+
+        /* Action selection */
+        actionSelection: function() {
+            var item = this.activeItem();
+            if (item == null) return this.selectionRight();
+            item.run();
         }
     }, {
         Collection: Movies,
