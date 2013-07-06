@@ -1,6 +1,7 @@
 @import "reset.less";
 @import "mixins.less";
 @import "player.less";
+@import "keyboard.less";
 @import "movies.less";
 
 body {
@@ -31,7 +32,9 @@ body {
 
 .header {
     height: 80px;
+    z-index: 12;
     position: relative;
+    background: #000;
 
     .search {
         position: absolute;
@@ -49,9 +52,4 @@ body {
         font-weight: 100;
         outline: none;
     }
-}
-
-.list {
-    margin-bottom: 20px;
-    margin-top: 20px;
 }

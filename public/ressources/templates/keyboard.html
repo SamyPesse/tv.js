@@ -1,0 +1,9 @@
+<div class="inner">
+    <% _.each(lines, function(keycodes) { %>
+    <div class="line">
+        <% _.each(keycodes, function(code) { %>
+            <div data-key="<%- code %>" class="key key-<%- code %>"><%- String.fromCharCode(code) %></div>
+        <% }); %>
+    </div>
+    <% }); %>
+</div>

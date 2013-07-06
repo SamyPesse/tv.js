@@ -75,10 +75,13 @@ require([
             Navigation.bind('left', except("player", this.components.movies.selectionLeft, this.components.movies));
             Navigation.bind('up', except("player", this.components.movies.selectionUp, this.components.movies));
             Navigation.bind('down', except("player", this.components.movies.selectionDown, this.components.movies));
-            Navigation.bind('enter', except("player", this.components.movies.actionSelection, this.components.movies));
+            Navigation.bind(['enter', 'space'], except("player", this.components.movies.actionSelection, this.components.movies));
 
             // player
-            Navigation.bind("space", only("player", this.components.player.togglePlay,  this.components.player));
+            Navigation.bind(['enter', 'space'], only("player", this.components.player.togglePlay,  this.components.player));
+
+            // Bind keyboard to search
+            this.components.keyboard.bindTo(this.$(".header .search"));
 
             return Application.__super__.finish.apply(this, arguments);
         },

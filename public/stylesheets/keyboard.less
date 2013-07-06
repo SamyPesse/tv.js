@@ -1,0 +1,45 @@
+.keyboard {
+    position: fixed;
+    z-index: 10;
+    height: 370px;
+    bottom: -370px;
+    right: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.8);
+    .transition(all, .8s);
+    .box-sizing(border-box);
+    border-bottom: none;
+    text-align: center;
+
+    .inner {
+        width: 1100px;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 15px;
+    }
+
+    &.active {
+        bottom: 0px;
+    }
+
+    .key {
+        display: inline-block;
+        background: rgba(0, 0, 0, 0.8);
+        border: 2px solid transparent;
+        padding: 14px 18px;
+        margin: 4px;
+        color: #fff;
+        font-size: 20px;
+        line-height: 20px;
+        cursor: pointer;
+
+        /* spacebar */
+        &.key-32 {
+            padding: 14px 300px;
+        }
+
+        &.active, &:hover {
+            border-color: #3498db;
+        }
+    }
+}
