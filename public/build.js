@@ -37,5 +37,8 @@ exports.config = {
         'vendors/socket.io': {
             exports: 'io'
         },
+        'vendors/mousetrap': {
+            exports: 'Mousetrap'
+        },
     }
 };

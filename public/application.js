@@ -19,7 +19,7 @@ require([
         name: "Movies",
         template: "main.html",
         metas: {
-            "description": "Searching movies made easy",
+            "description": "Searching and watching movies made easy",
             "viewport": "width=device-width, initial-scale=1, maximum-scale=1"
         },
         links: {
@@ -48,10 +48,9 @@ require([
         },
 
         /* (event) Do search */
-        doSearch: _.throttle(function(e) {
+        doSearch: _.debounce(function(e) {
             e.preventDefault();
             q = this.$(".header .search").val();
-            console.log("search "+q);
             this.router.navigate("search/:q", {
                 "q": q
             });

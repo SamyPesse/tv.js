@@ -2,8 +2,9 @@ define([
     "Underscore",
     "jQuery",
     "yapp/yapp",
+    "vendors/mousetrap",
     "collections/movies"
-], function(_, $, yapp, Movies) {
+], function(_, $, yapp, Mousetrap, Movies) {
     var logging = yapp.Logger.addNamespace("movies");
 
     // List Item View
@@ -29,6 +30,9 @@ define([
         open: function() {
             this.list.closeAll();
             this.$el.addClass("active");
+            $('html, body').animate({
+                "scrollTop": this.$el.offset().top-180
+            }, 600);
         },
 
         /* (action) Open infos */
@@ -51,6 +55,11 @@ define([
         play: function(e) {
             e.preventDefault();
             this.model.play();
+        },
+
+        /* Is active */
+        isActive: function(e) {
+            return this.$el.hasClass("active");
         }
     });
 
@@ -63,6 +72,15 @@ define([
             loadAtInit: false
         }, yapp.List.prototype.defaults),
 
+        initialize: function() {
+            MoviesList.__super__.initialize.apply(this, arguments);
+            Mousetrap.bind('right', _.bind(this.selectionRight, this));
+            Mousetrap.bind('left', _.bind(this.selectionLeft, this));
+            Mousetrap.bind('up', _.bind(this.selectionUp, this));
+            Mousetrap.bind('down', _.bind(this.selectionDown, this));
+            return this;
+        },
+
         search: function(q) {
             this.collection.options.loaderArgs = [q];
             return this.refresh();
@@ -74,6 +92,58 @@ define([
                 item.close();
             });
             return this;
+        },
+
+        /* Get index active item */
+        activeIndex: function() {
+            return _.reduce(this.getItemsList(), function(state, item, i) {
+                if (item.isActive()) {
+                    return i;
+                }
+                return state;
+            }, null);
+        },
+
+        /* Return items by lines */
+        itemsByLine: function() {
+            return Math.floor(this.$el.width()/274);
+        },
+
+        /* Select next */
+        selectionMove: function(d) {
+            var items = this.getItemsList();
+            var i = this.activeIndex();
+            if (i == null) {
+                i = 0;
+            } else {
+                i = i + d;
+            }
+            if (_.size(this.items) == 0) return this;
+
+            if (i >= _.size(this.items)) i = 0;
+            if (i < 0) i = _.size(this.items) - 1;
+            items[i].open();
+            return this;
+        },
+
+        /* Select right */
+        selectionRight: function() {
+            return this.selectionMove(1);
+        },
+
+        /* Select left */
+        selectionLeft: function() {
+            return this.selectionMove(-1);
+        },
+
+        /* Select up */
+        selectionUp: function() {
+            return this.selectionMove(-this.itemsByLine());
+        },
+
+        /* Select down */
+        selectionDown: function() {
+            return this.selectionMove(this.itemsByLine());
         }
     }, {
         Collection: Movies,

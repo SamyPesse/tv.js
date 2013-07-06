@@ -21,5 +21,5 @@ And go to localhost:8888 on your browser
 
 ## How to install it on your TV ?
 
-    Coming soon using a Raspberry Pi
+Coming soon using a Raspberry Pi
 
