@@ -4,10 +4,16 @@
     "description": "Searching and watching movies made easy.",
     "version": "0.0.1",
     "dependencies": {
+        "q": "0.9.6",
+        "underscore": "1.4.4",
+
+        "request": "2.22.0",
+
         "express": "3.0.0",
         "socket.io": "0.9.16",
-        "underscore": "1.4.4",
-        "node-torrent": "git+ssh://git@github.com:superafroman/node-torrent.git#master"
+
+        "fluent-ffmpeg": "1.5.2",
+        "peerflix": "0.0.37"
     },
     "engines": {
         "node": "0.8.x",

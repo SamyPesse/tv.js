@@ -1,4 +1,3 @@
 module.exports = {
-    movies: require('./lib/movies'),
-    downloader: require('./lib/downloader'),
+    server: require('./lib/server')
 };
