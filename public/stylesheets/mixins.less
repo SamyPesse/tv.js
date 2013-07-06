@@ -1,0 +1,139 @@
+/* Animation */
+.animation(@args) {
+    -webkit-animation: @args;
+    -moz-animation: @args;
+    -ms-animation: @args;
+    -o-animation: @args;
+}
+.animation-delay(@delay) {
+    -webkit-animation-delay: @delay;
+    -moz-animation-delay: @delay;
+    -ms-animation-delay: @delay;
+    -o-animation-delay: @delay;
+}
+.animation-direction(@direction) {
+    -webkit-animation-direction: @direction;
+    -moz-animation-direction: @direction;
+    -ms-animation-direction: @direction;
+    -o-animation-direction: @direction;
+}
+.animation-duration(@duration) {
+    -webkit-animation-duration: @duration;
+    -moz-animation-duration: @duration;
+    -ms-animation-duration: @duration;
+    -o-animation-duration: @duration;
+}
+.animation-iteration-count(@count) {
+    -webkit-animation-iteration-count: @count;
+    -moz-animation-iteration-count: @count;
+    -ms-animation-iteration-count: @count;
+    -o-animation-iteration-count: @count;
+}
+.animation-name(@name) {
+    -webkit-animation-name: @name;
+    -moz-animation-name: @name;
+    -ms-animation-name: @name;
+    -o-animation-name: @name;
+}
+.animation-play-state(@state) {
+    -webkit-animation-play-state: @state;
+    -moz-animation-play-state: @state;
+    -ms-animation-play-state: @state;
+    -o-animation-play-state: @state;
+}
+.animation-timing-function(@function) {
+    -webkit-animation-timing-function: @function;
+    -moz-animation-timing-function: @function;
+    -ms-animation-timing-function: @function;
+    -o-animation-timing-function: @function;
+}
+ 
+.reset-list(@display: block) {
+    @include noOuterDimensions;
+    display: @display;
+    list-style: none;
+}
+ 
+.roundedCorners(@radius: 5px) {
+    border-radius: @radius;
+    -moz-border-radius: @radius;
+    -webkit-border-radius: @radius;
+}
+ 
+.user-select(@settings) {
+    -moz-user-select: @settings;
+    -o-user-select: @settings;
+    -webkit-user-select: @settings;
+    user-select: @settings;
+}
+
+.box-shadow(@settings) {
+    box-shadow: @settings;
+    -moz-box-shadow: @settings;
+    -webkit-box-shadow: @settings;
+}
+
+.background-radient(@settings) {
+    background-image: linear-gradient(@settings);
+    background-image: -o-linear-gradient(@settings);
+    background-image: -ms-linear-gradient(@settings);
+    background-image: -moz-linear-gradient(@settings);
+    background-image: -webkit-linear-gradient(@settings);
+}
+
+.transition(@property: all, @time: .5s) {
+    // transition times
+    transition-duration: @time;
+    -o-transition-duration: @time;
+    -ms-transition-duration: @time;
+    -moz-transition-duration: @time;
+    -webkit-transition-duration: @time;
+    // transition properties
+    transition-property: @property;
+    -o-transition-property: @property;
+    -ms-transition-property: @property;
+    -moz-transition-property: @property;
+    -webkit-transition-property: @property;
+    // transition function
+    transition-timing-function: ease-in-out;
+    -o-transition-timing-function: ease-in-out;
+    -ms-transition-timing-function: ease-in-out;
+    -moz-transition-timing-function: ease-in-out;
+    -webkit-transition-timing-function: ease-in-out;
+}
+
+.grayscale(@value: 100%) {
+    filter: grayscale(@value);
+    -webkit-filter: grayscale(@value);
+    -moz-filter: grayscale(@value);
+    -ms-filter: grayscale(@value);
+    -o-filter: grayscale(@value);
+}
+
+.font-smoothing(@value: antialiased) {
+    font-smoothing: @value;
+    -webkit-font-smoothing: @value;
+    -moz-font-smoothing: @value;
+    -ms-font-smoothing: @value;
+    -o-font-smoothing: @value;
+}
+ 
+.background-size(@tuplePercent) {
+    background-size: @tuplePercent;
+    -moz-background-size: @tuplePercent;
+    -webkit-background-size: @tuplePercent;
+}
+
+.box-sizing(@value) {
+    -moz-box-sizing: @value;
+    box-sizing: @value;
+    -o-box-sizing: @value;
+    -webkit-box-sizing: @value;
+}
+
+.border-radius(@value) {
+    -moz-border-radius: @value;
+    border-radius: @value;
+    -o-border-radius: @value;
+    -webkit-border-radius: @value;
+}

@@ -1,0 +1,56 @@
+@import "reset.less";
+@import "mixins.less";
+@import "movies.less";
+
+body {
+    background: #000;
+    font-family: "Helvetica Neue",Arial,sans-serif;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    font-family: "Helvetica Neue",Arial,sans-serif;
+    color: inherit;
+    font-weight: 100;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    font-family: "Helvetica Neue",Arial,sans-serif;
+    color: inherit;
+    font-weight: 100;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    font-family: "Helvetica Neue",Arial,sans-serif;
+    color: inherit;
+    font-weight: 100;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    font-family: "Helvetica Neue",Arial,sans-serif;
+    color: inherit;
+    font-weight: 100;
+}
+
+.header {
+    height: 80px;
+    position: relative;
+
+    .search {
+        position: absolute;
+        right: 20px;
+        left: 20px;
+        font-size: 40px;
+        line-height: 40px;
+        top: 10px;
+        border: none;
+        .box-shadow(none);
+        background: none;
+        border-bottom: 2px solid #fff;
+        color: #fff;
+        font-family: inherit;
+        font-weight: 100;
+        outline: none;
+    }
+}
+
+.list {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}

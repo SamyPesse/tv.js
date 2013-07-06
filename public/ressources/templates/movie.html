@@ -1,0 +1,15 @@
+<img class="cover" src="<%- object.get("image") %>" />
+<div class="infos">
+    <p class="title"><%- object.get("title") %></p>
+    <p class="description"><%- object.get("description") %></p>
+    <% if (object.canPlay()) { %>
+        <a href="#" class="action play">play</a>
+    <% } else if (object.isDownloading()) { %>
+    <a href="#" class="action downloading">
+        <div class="bar" style="width: <%- object.downloadPercent() %>%;"></div>
+        <span><%- object.downloadPercent() %>%</a></span>
+    <% } else { %>
+    <a href="#" class="action download">download</a>
+    <% } %>
+</div>
+<div class="percent" style="width: <%- object.downloadPercent() %>%;"></div>
