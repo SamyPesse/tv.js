@@ -28,8 +28,9 @@ require([
             "icon": yapp.Urls.static("images/favicon.png")
         },
         routes: {
-            "search/:q": "search",
-            "play/:id": "play",
+            "*actions": "routeHome",
+            "search/:q": "routeSearch",
+            "play/:id": "routePlay",
         },
         events: {
             "keyup .header .search": "searchInput",
@@ -45,10 +46,7 @@ require([
                 });
             }, 1000);
 
-            Navigation.bind('esc', function() {
-                alert("return to home");
-                yapp.History.navigate("");
-            });
+            Navigation.bind('esc', _.bind(this.goHome, this));
             return this;
         },
 
@@ -56,16 +54,30 @@ require([
             return {}
         },
 
+        /* Route 'home' */
+        routeHome: function(id) {
+            this.components.player.hide();
+            this.components.movies.recents();
+            this.$(".header .search").val("");
+            return this;
+        },
+
         /* Route 'search' */
-        search: function(q) {
+        routeSearch: function(q) {
             this.components.player.hide();
             this.components.movies.search(q);
             return this;
         },
 
         /* Route 'search' */
-        play: function(id) {
+        routePlay: function(id) {
             this.components.player.show();
+            return this;
+        },
+
+        /* Return to home page */
+        goHome: function() {
+            this.router.navigate("home");
             return this;
         },
 
@@ -92,7 +104,9 @@ require([
                 40 /* down */
             ];
             var code = (e.keyCode ? e.keyCode : e.which);
-            if (_.contains(listCodes, code)) {
+            if (code == 27 /* esc */) {
+                this.goHome();
+            } else if (_.contains(listCodes, code)) {
                 this.components.movies.focus();
             }
             this.doSearch();

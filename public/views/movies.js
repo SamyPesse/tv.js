@@ -3,9 +3,32 @@ define([
     "jQuery",
     "yapp/yapp",
     "utils/navigation",
-    "collections/movies"
-], function(_, $, yapp, Navigation, Movies) {
+    "models/movie"
+], function(_, $, yapp, Navigation, Movie) {
     var logging = yapp.Logger.addNamespace("movies");
+
+    // Collection
+    var Movies = yapp.Collection.extend({
+        model: Movie,
+        defaults: _.defaults({
+            loader: "recents",
+            loaderArgs: [],
+            limit: 10
+        }, yapp.Collection.prototype.defaults),
+
+        search: function(query) {
+            return yapp.Requests.getJSON("/api/movies/search/"+encodeURIComponent(query)).done(_.bind(function(data) {
+                this.add(data);
+            }, this));
+        },
+
+        recents: function() {
+            this.add({
+                list: [],
+                n: 0
+            });
+        },
+    });
 
     // List Item View
     var MovieItem = yapp.List.Item.extend({
@@ -20,8 +43,11 @@ define([
                 object: this.model,
             }
         },
-        finish: function() {
-            return MovieItem.__super__.finish.apply(this, arguments);
+
+        /* Initialize */
+        initialize: function() {
+            MovieItem.__super__.initialize.apply(this, arguments);
+            return this;
         },
 
         /* (action) Open infos */
@@ -41,12 +67,7 @@ define([
         /* Default action */
         run: function(e) {
             if (e != null) e.preventDefault();
-
-            if (this.model.canPlay()) {
-                this.model.play();
-            } else if (!this.model.isDownloading()) {
-                this.model.download();
-            }
+            this.model.play();
         },
 
         /* Is active */
@@ -66,16 +87,28 @@ define([
 
         initialize: function() {
             MoviesList.__super__.initialize.apply(this, arguments);
+
+            // Navigation
             Navigation.bind('right', _.bind(this.selectionRight, this));
             Navigation.bind('left', _.bind(this.selectionLeft, this));
             Navigation.bind('up', _.bind(this.selectionUp, this));
             Navigation.bind('down', _.bind(this.selectionDown, this));
             Navigation.bind('enter', _.bind(this.actionSelection, this));
+
             return this;
         },
 
+        /* Refresh the list with results from a search */
         search: function(q) {
+            this.collection.options.loader = "search";
             this.collection.options.loaderArgs = [q];
+            return this.refresh();
+        },
+
+        /* Refresh the list with recents played */
+        recents: function(q) {
+            this.collection.options.loader = "recents";
+            this.collection.options.loaderArgs = [];
             return this.refresh();
         },
 

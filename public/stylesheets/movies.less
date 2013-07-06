@@ -88,7 +88,7 @@
                 margin-bottom: 15px;
             }
 
-            a.action {
+            a.play {
                 background: rgba(0, 0, 0, 0.4);
                 height: 62px;
                 .box-sizing(border-box);
@@ -102,50 +102,12 @@
                 font-size: 22px;
                 margin-bottom: 10px;
                 position: relative;
+                background: #2ecc71;
 
-                &.play {
-                    background: #2ecc71;
-                    &:hover {
-                        background: #3498db;
-                    }
-                }
-
-                &.download {
-                    &:hover {
-                        background: #3498db;
-                    }
-                }
-
-                &.downloading {
-                    .bar {
-                        position: absolute;
-                        top: 0px;
-                        bottom: 0px;
-                        left: 0px;
-                        background: #2ecc71;
-                        z-index: 0;
-                    }
-
-                    span {
-                        position: absolute;
-                        top: 0px;
-                        bottom: 0px;
-                        left: 0px;
-                        right: 0px;
-                        z-index: 1;
-                        line-height: 62px;
-                    }
+                &:hover {
+                    background: #3498db;
                 }
             }
-        }
-
-        .percent {
-            position: absolute;
-            height: 8px;
-            bottom: 0px;
-            left: 0px;
-            background: #2ecc71;
-            z-index: 0;
         }
 
         &.active {
@@ -154,10 +116,6 @@
 
             .infos {
                 bottom: 0px;
-            }
-
-            .percent {
-                display: none;
             }
         }        
     }
