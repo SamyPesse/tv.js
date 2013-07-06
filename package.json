@@ -7,6 +7,8 @@
         "q": "0.9.6",
         "underscore": "1.4.4",
 
+        "request": "2.22.0",
+
         "express": "3.0.0",
         "socket.io": "0.9.16",
 
