@@ -41,7 +41,7 @@ require([
             return {}
         },
 
-        /* Route */
+        /* Route 'search' */
         search: function(q) {
             this.components.movies.search(q);
             return this;
