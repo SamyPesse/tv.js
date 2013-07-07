@@ -123,7 +123,7 @@ define([
             var self = this;
             var $video = this.video();
             //$video.src({ type: "video/mp4", src: "http://video-js.zencoder.com/oceans-clip.mp4" });
-            $video.src({ type: "video/ogv", src: STREAM_URL });
+            $video.src({ type: "video/ogg", src: STREAM_URL });
             $video.on("durationchange", function () {
                 logging.log("duration change");
                 self.duration = $video.duration();
