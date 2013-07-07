@@ -25,7 +25,7 @@ require([
         },
         events: {
             "click .touch": "sendTouch",
-            "keydown .search": "sendSearch"
+            "keyup .search": "sendSearch"
         },
 
         initialize: function() {

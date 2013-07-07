@@ -133,6 +133,7 @@ require([
         /* Route 'search' */
         routeSearch: function(q) {
             this.page = "search";
+            this.$(".header .search").val(q);
             this.components.player.hide();
             this.components.movies.search(q);
             return this;

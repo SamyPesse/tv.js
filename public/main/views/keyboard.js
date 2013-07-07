@@ -53,8 +53,8 @@ define([
 
         /* Bind to an input */
         bindTo: function(input) {
-            if (!TV.check()) return this;
             input.focus(_.bind(function() {
+                if (!TV.check()) return;    
                 this.show();
             }, this));
             input.blur(_.bind(function() {

@@ -163,7 +163,7 @@ define([
             }
             if (_.size(this.items) == 0) return this;
 
-            if (i >= _.size(this.items)) _.size(this.items) - 1;
+            if (i >= _.size(this.items)) i = _.size(this.items) - 1;
             if (i < 0) return this.focusSearch();
             items[i].open();
             return this;
