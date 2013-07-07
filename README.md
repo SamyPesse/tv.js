@@ -1,4 +1,4 @@
-tv.js : Smart TV with P2P streaming in JS
+tv.js : Smart TV with P2P streaming
 ====
 
 ![screen](https://raw.github.com/SamyPesse/movies/master/screens/2.png)
@@ -6,9 +6,9 @@ tv.js : Smart TV with P2P streaming in JS
 Complete TV interface for unlimited watching in streaming movies.
 Use iTunes for finding movies informations and BitTorrent for downloading and streaming movies.
 
-It runs a server which can run in a Raspberry Pi and the UI can be controlled by a smartphone (no need of keyboard or mouse).
+It runs a server which can run in a Raspberry Pi and the UI can be controlled from a smartphone (no need of keyboard or mouse).
 
-This application is the result of a 24h personal hackathon (7 july 2013) by Aaron O'Mullan (@AaronO) and me (@SamyPesse).
+This application is the result of a 24h personal hackathon (7th of July 2013) by Aaron O'Mullan (@AaronO) and me (@SamyPesse).
 
 
 ![screen](https://raw.github.com/SamyPesse/movies/master/screens/1.png)
@@ -20,21 +20,21 @@ This application is the result of a 24h personal hackathon (7 july 2013) by Aaro
 
 ## How to use it on your computer ?
 
-For building and running the app, you'll need :
-    
+To build and run the app, you'll need :
+
     node
     rake
     ffmpeg
 
 
-For installing dependencies, build and run the all :
+To build and run the all :
 
     rake install
     rake
 
-And go to localhost:8888 on your browser
+And go to [http://localhost:8888](http://localhost:8888) on your browser
 
-Ou can run only without rebuilding the client with :
+Or simply run the server without rebuilding the client with :
 
     rake run
 
@@ -53,7 +53,7 @@ This application has been built and designed to run on a TV screen using a Raspb
 
 ### Steps :
 
-#### 1. Install Raspbian & NodeJS
+#### 1. Install Raspbian & NodeJs
 
 Follow [this tutorial](http://blog.rueedlinger.ch/2013/03/raspberry-pi-and-nodejs-basic-setup/) to install Raspbian and Node Js on your Raspberry Pi
 
@@ -77,7 +77,7 @@ Follow [this tutorial](http://blog.rueedlinger.ch/2013/03/raspberry-pi-and-nodej
 
 ## How to install ffmpeg ?
 
-tv.js needs ffmpeg for converting videos into ogv, be sure to have ffmpeg installed with the good codec for converting into ogv.
+tv.js needs ffmpeg to convert the videos to ogv, make sure you have ffmpeg installed with the necessary codecs.
 
 #### On mac :
 
