@@ -1,4 +1,4 @@
-tv.js
+tv.js : Smart TV with P2P streaming in JS
 ====
 
 ![screen](https://raw.github.com/SamyPesse/movies/master/screens/2.png)
