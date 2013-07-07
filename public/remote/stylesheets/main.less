@@ -1,8 +1,57 @@
 @import "../../stylesheets/reset.less";
 
+body {
+    background: #fff;
+}
+
 .touch {
+    position: fixed;
     padding: 10px 30px;
     font-weight: 200;
     font-size: 30px;
     line-height: 30px;
+    cursor: pointer;
+    background: #3498db;
+    color: #fff;
+    text-align: center;
+    .box-sizing(border-box);
+    height: 50px;
+
+    &.up {
+        right: 0px;
+        left: 0px;
+        top: 0px;
+    }
+
+    &.right {
+        right: 0px;
+        left: 0px;
+        top: 50px;
+    }
+
+    &.left {
+        right: 0px;
+        left: 0px;
+        top: 100px;
+    }
+
+    &.down {
+        right: 0px;
+        left: 0px;
+        top: 150px;
+    }
+
+
+    &.play {
+        right: 0px;
+        left: 0px;
+        bottom: 50px;
+        background: #2ecc71;
+    }
+
+    &.escape {
+        right: 0px;
+        left: 0px;
+        bottom: 0px;
+    }
 }

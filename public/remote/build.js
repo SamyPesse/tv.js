@@ -5,7 +5,7 @@ exports.config = {
     "base": __dirname,
 
     // Base url for the application
-    "baseUrl": "/",
+    "baseUrl": "/remote/",
 
     // Application name
     "name": "Remote",

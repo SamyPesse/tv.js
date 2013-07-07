@@ -1,8 +1,9 @@
 define([
     "yapp/yapp",
     'vendors/mousetrap',
-    'utils/tv'
-], function (yapp, Mousetrap, TV) {
+    'utils/tv',
+    'utils/updates'
+], function (yapp, Mousetrap, TV, Updates) {
     var bindings = {};
 
     Mousetrap.stopCallback= function(e, element, combo) {
@@ -34,5 +35,20 @@ define([
             return;
         },
     };
+
+    Updates.on("remote:input", function(key) {
+        var mapKeys = {
+            38: "up",
+            39: "right",
+            37: "left",
+            40: "down",
+            32: "space",
+            27: "esc"
+        };
+        key = mapKeys[key];
+        console.log("remote control ", key);
+        Mousetrap.trigger(key);
+    });
+
     return Navigation;
 });

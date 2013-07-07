@@ -5,7 +5,7 @@ require([
     "yapp/args",
     "vendors/socket.io",
     "ressources/imports",
-], function(_, $, yapp, io, args) {
+], function(_, $, yapp, args, io) {
     // Configure yapp
     yapp.configure(args, {
          "logLevels": {
@@ -32,11 +32,12 @@ require([
 
         initialize: function() {
             Application.__super__.initialize.apply(this, arguments);
+
             var url = [window.location.protocol, '//', window.location.host].join('');
             this.socket = io.connect(url);
             this.socket.on('connect', _.bind(function () {
                 this.socket.emit('remote', 'start');
-            }), this);
+            }, this));
             return this;
         },
 
@@ -52,7 +53,8 @@ require([
             var key = 0;
             e.preventDefault();
             key = $(e.currentTarget).data("key");
-            socket.emit('remote_input', key);
+            console.log("send ", key);
+            this.socket.emit('remote_input', key);
         }
     });
 
