@@ -165,6 +165,7 @@ define([
 
         /* Stop streaming */
         stopStreaming: function() {
+            this.pause();
             return yapp.Requests.getJSON("/api/movie/stop");
         },
 
