@@ -107,7 +107,14 @@ define([
         },
 
         /* Run streaming */
-        runStream: function() {
+        runStream: function(movieid) {
+            return this.stopStreaming().always(function() {
+                return yapp.Requests.getJSON("/api/movie/play/"+movieid);
+            });  
+        },
+
+        /* Add streaming to video */
+        addStream: function() {
             $(this.video()).attr("src", STREAM_URL);
         },
 
@@ -152,7 +159,7 @@ define([
                 this.pause();
             } else if (!this.streamReady) {
                 this.streamReady = true;
-                this.runStream();
+                this.addStream();
             }
             return this.updateMessages();
         },
@@ -182,8 +189,10 @@ define([
         },
 
         /* Show player */
-        show: function() {
+        show: function(movieid) {
+            if (movieid != null) this.runStream(movieid);
             this.$el.addClass("active");
+
         },
 
         /* Hide player */

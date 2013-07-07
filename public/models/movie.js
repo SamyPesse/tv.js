@@ -17,11 +17,7 @@ define([
             yapp.History.navigate("play/:id", {
                 "id": this.get("id")
             });
-            return yapp.Requests.getJSON("/api/movie/play/"+this.get("id")).done(_.bind(function(data) {
-                this.trigger("play:start");
-            }, this), _.bind(function() {
-                this.trigger("play:fail");
-            }, this));
+            return this;
         },
 
         /* Get by id */

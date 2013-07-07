@@ -127,7 +127,7 @@ require([
         /* Route 'search' */
         routePlay: function(id) {
             this.page = "player";
-            this.components.player.show();
+            this.components.player.show(id);
             return this;
         },
 
