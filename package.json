@@ -1,6 +1,6 @@
 {
-    "author": "Samy Pessé",
-    "name": "movies",
+    "author": "Samy Pesse",
+    "name": "cinema.js",
     "description": "Searching and watching movies made easy.",
     "version": "0.0.1",
     "dependencies": {

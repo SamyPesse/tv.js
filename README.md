@@ -1,4 +1,4 @@
-movies
+cinema.js
 ====
 
 ![screen](https://raw.github.com/SamyPesse/movies/master/screens/2.png)
