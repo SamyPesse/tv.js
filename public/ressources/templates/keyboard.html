@@ -1,9 +1,13 @@
 <div class="inner">
-    <% _.each(lines, function(keycodes) { %>
+    <% 
+    var i = 0;
+    _.each(lines, function(keycodes) { %>
     <div class="line">
         <% _.each(keycodes, function(code) { %>
-            <div data-key="<%- code %>" class="key key-<%- code %>"><%- String.fromCharCode(code) %></div>
-        <% }); %>
+            <div data-index="<%- i %>" data-keycode="<%- code %>" class="key key-<%- code %>"><%- String.fromCharCode(code) %></div>
+        <% 
+        i = i + 1;
+        }); %>
     </div>
     <% }); %>
 </div>
