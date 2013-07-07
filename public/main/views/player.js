@@ -66,7 +66,7 @@ define([
             this.position = p;
             var percent = this.getPlayPercent();
             this.$(".bar .play").css("width", percent+"%");
-            this.$(".toolbar .duration").text(toHHMMSS(this.position)+" / "+toHHMMSS(this.duration));
+            this.$(".toolbar .duration").text(toHHMMSS(this.position));
             this.setLock();
         },
 
@@ -95,7 +95,6 @@ define([
         /* Get video element */
         video: function() {
             var v = videojs("video");
-            console.log(v);
             return v;
         },
 
@@ -193,7 +192,7 @@ define([
         /* Set lock */
         setLock: function(l) {
             if (l == null) {
-                l = this.downloadPercent < _.max([2, this.getPlayPercent()]);
+                l = this.downloadPercent < _.max([1, this.getPlayPercent()]);
             }
             this.lock = l;
             if (this.lock) {
