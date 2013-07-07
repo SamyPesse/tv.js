@@ -36,6 +36,7 @@ require([
         events: {
             "keydown .header .search": "searchKeydown",
             "keyup .header .search": "searchKeyup",
+            "click .intro": "disableTv"
         },
 
         initialize: function() {
@@ -175,6 +176,12 @@ require([
                 e.preventDefault();
             }
         },
+
+        /* (event) Disable tv */
+        disableTv: function() {
+            TV.enabled = false;
+            this.$(".intro").hide();
+        }
     });
 
     var app = new Application();
