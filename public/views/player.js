@@ -83,7 +83,9 @@ define([
                 this.$(".toolbar .download-percent").text(this.downloadPercent+"%");
                 this.setLock();
             }
-            if (stats.download_speed != null) {
+            if (stats.complete == true) {
+                this.$(".toolbar .speed").text("download complete");
+            } else if (stats.download_speed != null) {
                 this.$(".toolbar .speed").text(stats.download_speed+" KB/s");
             }
             return this;
