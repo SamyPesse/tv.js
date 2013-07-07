@@ -6,6 +6,9 @@ define([
 ], function(_, $, yapp, Updates) {
     var logging = yapp.Logger.addNamespace("player");
 
+    var STREAM_URL = "/api/stream";
+
+
     var toHHMMSS = function (sec_num) {
         sec_num = Math.floor(sec_num);
         var hours   = Math.floor(sec_num / 3600);
@@ -30,9 +33,12 @@ define([
         initialize: function() {
             Player.__super__.initialize.apply(this, arguments);
             this.toolbarTimeout = null;
+            this.streamReady = false;
             this.playing = false;
             this.duration = 0;
             this.position = 0;
+            this.downloadPercent = 0;
+            this.lock = true;
 
             Updates.on("streaming:stats", this.setStats, this);
             return this;
@@ -49,22 +55,33 @@ define([
                 this.setPlayCurrentTime(this.video().currentTime);
             }, this));
 
+            this.setLock(this.lock);
+
             return Player.__super__.finish.apply(this, arguments);
         },
 
         /* Set play progress */
         setPlayCurrentTime: function(p) {
-            var percent;
             this.position = p;
-            percent = Math.floor((this.position*100)/this.duration);
+            var percent = this.getPlayPercent();
             this.$(".bar .play").css("width", percent+"%");
             this.$(".toolbar .duration").text(toHHMMSS(this.position)+" / "+toHHMMSS(this.duration));
+            this.setLock();
+        },
+
+        /* Set play progress */
+        getPlayPercent: function(p) {
+            if (this.duration == 0) return 0;
+            return Math.floor((this.position*100)/this.duration);
         },
 
         /* Set stat */
         setStats: function(stats) {
             if (stats.progress != null) {
-                this.$(".bar .download").css("width", Math.floor(stats.progress*100)+"%");
+                this.downloadPercent = Math.floor(stats.progress*100);
+                this.$(".bar .download").css("width", this.downloadPercent+"%");
+                this.$(".toolbar .download-percent").text(this.downloadPercent+"%");
+                this.setLock();
             }
             if (stats.download_speed != null) {
                 this.$(".toolbar .speed").text(stats.download_speed+" KB/s");
@@ -79,16 +96,17 @@ define([
 
         /* Play the video */
         play: function() {
-            this.playing = true;
-            this.toolbarHide(4000);
-            this.video().play();
+            return this.setPlaying(true);
         },
 
         /* Pause the video */
         pause: function() {
-            this.playing = false;
-            this.toolbarShow();
-            this.video().pause();
+            return this.setPlaying(false);
+        },
+
+        /* Run stream */
+        runStream: function() {
+            $(this.video()).attr("src", STREAM_URL);
         },
 
         /* Play/Pause the video */
@@ -114,6 +132,45 @@ define([
             this.toolbarTimeout = setTimeout(_.bind(function() {
                 this.$(".toolbar").addClass("hide");
             }, this), t || 0);
+            return this;
+        },
+
+        /* Set lock */
+        setLock: function(l) {
+            if (l == null) {
+                l = this.downloadPercent < _.max([2, this.getPlayPercent()]);
+            }
+            this.lock = l;
+            if (this.lock) {
+                this.pause();
+            } else if (!this.streamReady) {
+                this.streamReady = true;
+                this.runStream();
+            }
+            return this.updateMessages();
+        },
+
+        /* Set playing */
+        setPlaying: function(l) {
+            if (this.lock && l != false) return this;
+
+            this.playing = l;
+
+            if (this.playing) {
+                this.toolbarHide(4000);
+                this.video().play();
+            } else {
+                this.toolbarShow();
+                this.video().pause();
+            }
+            return this.updateMessages();
+        },
+
+        /* update message */
+        updateMessages: function() {
+            this.$(".message.wait").toggle(this.lock);
+            this.$(".message.pause").toggle(!this.playing && !this.lock);
+
             return this;
         },
 

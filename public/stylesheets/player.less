@@ -23,6 +23,28 @@
             width: 100%;
             height: 100%;
         }
+
+        .message {
+            position: absolute;
+            z-index: 10;
+            width: 540px;
+            height: 50px;
+            margin-left: -270px;
+            margin-top: -25px;
+            top: 50%;
+            left: 50%;
+            background: #2ecc71;
+            color: #fff;
+            text-align: center;
+            line-height: 50px;
+            font-size: 30px;
+            font-weight: 100;
+            text-transform: uppercase;
+
+            &.pause {
+                background: #3498db;
+            }
+        }
     }
 
     .toolbar {
@@ -58,6 +80,11 @@
             font-weight: 100;
             color: #fff;
 
+            &.download-percent {
+                left: 20px;
+                color: #f1c40f;
+            }
+
             &.duration {
                 right: 20px;
             }
@@ -71,7 +98,7 @@
             position: absolute;
             bottom: 30px;
             right: 40px;
-            left: 40px;
+            left: 100px;
             height: 10px;
             background: #333;
 

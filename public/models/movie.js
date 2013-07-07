@@ -13,12 +13,12 @@ define([
         
         /* Play the movie */
         play: function() {
-            this.addToRecents();  
+            this.addToRecents();
+            yapp.History.navigate("play/:id", {
+                "id": this.get("id")
+            });
             return yapp.Requests.getJSON("/api/movie/play/"+this.get("id")).done(_.bind(function(data) {
                 this.trigger("play:start");
-                yapp.History.navigate("play/:id", {
-                    "id": this.get("id")
-                });
             }, this), _.bind(function() {
                 this.trigger("play:fail");
             }, this));
