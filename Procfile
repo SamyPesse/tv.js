@@ -1,1 +1,0 @@
-web: yapp.js all
