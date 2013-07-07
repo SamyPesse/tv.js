@@ -38,6 +38,7 @@ define([
             this.duration = 0;
             this.position = 0;
             this.downloadPercent = 0;
+            this.speed = 1;
             this.lock = true;
             this.error = 0;
 
@@ -48,6 +49,16 @@ define([
         finish: function() {
             this.updateMessages();
             return Player.__super__.finish.apply(this, arguments);
+        },
+
+        /* Set play speed */
+        setPlaySpeed: function(s, d) {
+            if (d != null) s = this.speed + d;
+            if (s < 0.25) s = 0.25;
+            if (s == this.speed) return this;
+            this.speed = s;
+            this.video().N.playbackRate = this.speed;
+            return this.updateMessages();
         },
 
         /* Set play progress */
@@ -90,11 +101,13 @@ define([
 
         /* Play the video */
         play: function() {
+            this.setPlaySpeed(1);
             return this.setPlaying(true);
         },
 
         /* Pause the video */
         pause: function() {
+            this.setPlaySpeed(1);
             return this.setPlaying(false);
         },
 
@@ -109,7 +122,7 @@ define([
         addStream: function() {
             var self = this;
             var $video = this.video();
-
+            //$video.src({ type: "video/mp4", src: "http://video-js.zencoder.com/oceans-clip.mp4" });
             $video.src({ type: "video/ogv", src: STREAM_URL });
             $video.on("durationchange", function () {
                 logging.log("duration change");
@@ -215,7 +228,12 @@ define([
             this.$(".message.wait").toggle(this.error == 0 && this.lock);
             this.$(".message.pause").toggle(this.error == 0 && !this.playing && !this.lock);
 
+            // Error
             this.$(".message.error-src").toggle(this.error == MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED);
+
+            // Speed
+            this.$(".message.speed").toggle(this.speed != 1);
+            this.$(".message.speed .value").text(this.speed);
             return this;
         },
 

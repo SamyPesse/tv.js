@@ -90,6 +90,12 @@ require([
 
             // player
             Navigation.bind(['enter', 'space'], only("player", this.components.player.togglePlay,  this.components.player));
+            Navigation.bind(['left'], only("player", function() {
+                this.setPlaySpeed(null, -0.25);
+            },  this.components.player));
+            Navigation.bind(['right'], only("player", function() {
+                this.setPlaySpeed(null, 0.25);
+            },  this.components.player));
 
             // Bind keyboard to search
             this.components.keyboard.bindTo(this.$(".header .search"));
