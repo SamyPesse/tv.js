@@ -53,22 +53,22 @@ This application has been built and designed to run on a TV screen using a Raspb
 
 ### Steps :
 
-1. Install Raspbian & NodeJS
+#### 1. Install Raspbian & NodeJS
 
 Follow [this tutorial](http://blog.rueedlinger.ch/2013/03/raspberry-pi-and-nodejs-basic-setup/) to install Raspbian and Node Js on your Raspberry Pi
 
-2. Install Chromium
+#### 2. Install Chromium
 
     sudo apt-get install chromium-browser
     sudo apt-get install ttf-mscorefonts-installer
 
-3. Install tv.js
+#### 3. Install tv.js
 
     export DISPLAY=:0.0
     git clone https://github.com/SamyPesse/tv.js.git && cd tv.js
     rake install
 
-4. Build and run tv.js
+#### 4. Build and run tv.js
 
     rake build
     rake run
