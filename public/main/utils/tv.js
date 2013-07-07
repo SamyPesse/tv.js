@@ -2,7 +2,7 @@ define([
 
 ], function () {
     var TV = {
-        enabled: true,
+        enabled: false,
 
         /*
          *  Check if display is a TV
