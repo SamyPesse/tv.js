@@ -106,9 +106,14 @@ define([
             return this.setPlaying(false);
         },
 
-        /* Run stream */
+        /* Run streaming */
         runStream: function() {
             $(this.video()).attr("src", STREAM_URL);
+        },
+
+        /* Stop streaming */
+        stopStreaming: function() {
+            return yapp.Requests.getJSON("/api/movie/stop");
         },
 
         /* Play/Pause the video */
@@ -183,6 +188,7 @@ define([
 
         /* Hide player */
         hide: function() {
+            this.stopStreaming();
             this.$el.removeClass("active");
         }
     });
