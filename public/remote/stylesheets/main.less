@@ -1,7 +1,26 @@
 @import "../../stylesheets/reset.less";
 
+@touchHeight: 50px;
+@searchHeight: 50px;
+
 body {
     background: #fff;
+}
+.search {
+    position: fixed;
+    top: 0px;
+    height: @searchHeight;
+    right: 0px;
+    left: 0px;
+    .box-sizing(border-box);
+    .box-shadow(none);
+    background: none;
+    border: none;
+    color: #000;
+    font-family: inherit;
+    font-weight: 100;
+    outline: none;
+    font-size: 38px;
 }
 
 .touch {
@@ -20,25 +39,25 @@ body {
     &.up {
         right: 0px;
         left: 0px;
-        top: 0px;
+        top: @searchHeight;
     }
 
     &.right {
         right: 0px;
         left: 0px;
-        top: 50px;
+        top: (@searchHeight+@touchHeight);
     }
 
     &.left {
         right: 0px;
         left: 0px;
-        top: 100px;
+        top: (@searchHeight+2*@touchHeight);
     }
 
     &.down {
         right: 0px;
         left: 0px;
-        top: 150px;
+        top: (@searchHeight+3*@touchHeight);
     }
 
 

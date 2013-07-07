@@ -26,7 +26,7 @@ require([
             "viewport": "width=device-width, initial-scale=1, maximum-scale=1"
         },
         links: {
-            "icon": yapp.Urls.static("images/favicon.png")
+            "icon": yapp.Urls.static("images/logo_48.png")
         },
         routes: {
             "*actions": "routeHome",
@@ -78,9 +78,6 @@ require([
                 } else {
                     this.goHome();
                 }
-                
-                
-                //this.components.keyboard.hide();
             }, this));
 
             // movies : navigation

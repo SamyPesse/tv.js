@@ -25,6 +25,7 @@ require([
         },
         events: {
             "click .touch": "sendTouch",
+            "keydown .search": "sendSearch"
         },
 
         initialize: function() {
@@ -57,6 +58,9 @@ require([
             return Application.__super__.finish.apply(this, arguments);
         },
 
+        /*
+         *  Click on a touch or send a keycode
+         */
         sendTouch: function(e) {
             var key = e;
             if (!_.isNumber(e)) {
@@ -64,6 +68,14 @@ require([
                 key = $(e.currentTarget).data("key");
             }
             this.socket.emit('remote_input', key);
+        },
+
+        /*
+         *  Search input change
+         */
+        sendSearch: function(e) {
+            var q = this.$(".search").val();
+            this.socket.emit('remote_search', q);
         }
     });
 
