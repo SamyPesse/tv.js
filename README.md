@@ -75,3 +75,12 @@ Follow [this tutorial](http://blog.rueedlinger.ch/2013/03/raspberry-pi-and-nodej
     chromium --kiosk http://localhost:8888
 
 
+## How to install ffmpeg ?
+
+tv.js needs ffmpeg for converting videos into ogv, be sure to have ffmpeg installed with the good codec for converting into ogv.
+
+#### On mac :
+
+    brew install ffmpeg --with-fdk-aac --with-ffplay --with-freetype --with-frei0r --with-libass --with-libvo-aacenc --with-libvorbis --with-libvpx --with-opencore-amr --with-openjpeg --with-opus --with-rtmpdump --with-schroedinger --with-speex --with-theora --with-tools
+
+
