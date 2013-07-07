@@ -3,13 +3,17 @@ tv.js : Smart TV with P2P streaming
 
 ![screen](https://raw.github.com/SamyPesse/movies/master/screens/2.png)
 
-Complete TV interface for unlimited watching in streaming movies.
-Use iTunes for finding movies informations and BitTorrent for downloading and streaming movies.
+A Smart TV application to stream movies using BitTorrent. (Yes it actually streams them in order even though it's BitTorrent)
 
-It runs a server which can run in a Raspberry Pi and the UI can be controlled from a smartphone (no need of keyboard or mouse).
+Tv.js used iTunes' API to find movies, isoHunt to search torrents and BitTorrent to downloading/stream movies.
 
-This application is the result of a 24h personal hackathon (7th of July 2013) by Aaron O'Mullan (@AaronO) and me (@SamyPesse).
+It runs as a server which can run on a Raspberry Pi and the UI can be controlled from a smartphone (no need of keyboard or mouse).
 
+Tv.js is the result of a 24h personal hackathon (7th of July 2013) by Aaron O'Mullan (@AaronO) and me (@SamyPesse).
+
+It's designed to run on a TV screen (through HDMI), but works just as well on a laptop. (it's entirely usuable with keyboard controls alone)
+
+You can see a video of it working here on Youtube: [https://www.youtube.com/watch?v=j71NCZnLffg](https://www.youtube.com/watch?v=j71NCZnLffg)
 
 ![screen](https://raw.github.com/SamyPesse/movies/master/screens/1.png)
 
@@ -18,6 +22,9 @@ This application is the result of a 24h personal hackathon (7th of July 2013) by
 ![screen](https://raw.github.com/SamyPesse/movies/master/screens/5.png)
 
 ![screen](https://raw.github.com/SamyPesse/movies/master/screens/6.png)
+
+
+
 
 
 ## How to use it on your computer ?
@@ -86,3 +93,15 @@ tv.js needs ffmpeg to convert the videos to ogv, make sure you have ffmpeg insta
     brew install ffmpeg --with-fdk-aac --with-ffplay --with-freetype --with-frei0r --with-libass --with-libvo-aacenc --with-libvorbis --with-libvpx --with-opencore-amr --with-openjpeg --with-opus --with-rtmpdump --with-schroedinger --with-speex --with-theora --with-tools
 
 
+## Todo
+    - Use IMBD or another API with a bigger movie collection that Itunes'
+    - Cache converted videos
+    - Improve overall stability
+    - Improve torrent picking algorithm (by seeds/leechers, size, votes, video format ...)
+    - Package using NodeWebkit for Windows/Mac/Linux/Raspberry PI
+    - Add other awesone stuff !
+
+
+## Disclaimer
+
+There are obvious legal issues, with downloading copyrighted material you do not have a license for. We do not endorse such use cases and bare no responsability for the use people make of it.
