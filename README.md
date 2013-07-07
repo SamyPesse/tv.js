@@ -17,6 +17,8 @@ This application is the result of a 24h personal hackathon (7th of July 2013) by
 
 ![screen](https://raw.github.com/SamyPesse/movies/master/screens/5.png)
 
+![screen](https://raw.github.com/SamyPesse/movies/master/screens/6.png)
+
 
 ## How to use it on your computer ?
 
@@ -79,7 +81,7 @@ Follow [this tutorial](http://blog.rueedlinger.ch/2013/03/raspberry-pi-and-nodej
 
 tv.js needs ffmpeg to convert the videos to ogv, make sure you have ffmpeg installed with the necessary codecs.
 
-#### On mac :
+#### Mac OS X :
 
     brew install ffmpeg --with-fdk-aac --with-ffplay --with-freetype --with-frei0r --with-libass --with-libvo-aacenc --with-libvorbis --with-libvpx --with-opencore-amr --with-openjpeg --with-opus --with-rtmpdump --with-schroedinger --with-speex --with-theora --with-tools
 
