@@ -14,7 +14,7 @@ define([
 
     // Video streaming stats
     Updates.socket.on('stats', function(data) {
-        logging.log("streaming stats ", data);
+        //logging.log("streaming stats ", data);
         Updates.trigger("streaming:stats", data);
     });
 

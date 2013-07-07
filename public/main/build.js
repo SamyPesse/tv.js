@@ -39,5 +39,8 @@ exports.config = {
         'vendors/mousetrap': {
             exports: 'Mousetrap'
         },
+        'vendors/video': {
+            exports: 'videojs'
+        }
     }
 };

@@ -2,12 +2,12 @@ define([
     "Underscore",
     "jQuery",
     "yapp/yapp",
+    "vendors/video",
     "utils/updates"
-], function(_, $, yapp, Updates) {
+], function(_, $, yapp, $video, Updates) {
     var logging = yapp.Logger.addNamespace("player");
 
     var STREAM_URL = "/api/stream";
-
 
     var toHHMMSS = function (sec_num) {
         sec_num = Math.floor(sec_num);
@@ -39,24 +39,14 @@ define([
             this.position = 0;
             this.downloadPercent = 0;
             this.lock = true;
+            this.error = 0;
 
             Updates.on("streaming:stats", this.setStats, this);
             return this;
         },
 
         finish: function() {
-            var $video = $(this.video());
-
-            $video.on("loadedmetadata", _.bind(function () {
-                this.duration = this.video().duration;
-            }, this));
-
-            $video.on("timeupdate", _.bind(function () {
-                this.setPlayCurrentTime(this.video().currentTime);
-            }, this));
-
-            this.setLock(this.lock);
-
+            this.updateMessages();
             return Player.__super__.finish.apply(this, arguments);
         },
 
@@ -93,7 +83,9 @@ define([
 
         /* Get video element */
         video: function() {
-            return this.$("video")[0];
+            var v = videojs("video");
+            console.log(v);
+            return v;
         },
 
         /* Play the video */
@@ -115,7 +107,43 @@ define([
 
         /* Add streaming to video */
         addStream: function() {
-            $(this.video()).attr("src", STREAM_URL);
+            var self = this;
+            var $video = this.video();
+
+            $video.src({ type: "video/ogv", src: STREAM_URL });
+            $video.on("durationchange", function () {
+                logging.log("duration change");
+                self.duration = $video.duration();
+            });
+
+            $video.on("timeupdate", function () {
+                logging.log("time update");
+                self.setPlayCurrentTime($video.currentTime());
+            });
+
+            $video.on("error", function (e) {
+                logging.error("Error streaming video ", $video, arguments);
+            });
+
+            $video.on("play", function () {
+                logging.log("Video play ");
+                self.playing = true;
+                self.toolbarHide(4000);
+                self.updateMessages();
+            });
+
+            $video.on("pause", function () {
+                logging.log("Video pause ");
+                self.playing = false;
+                self.toolbarShow();
+                self.updateMessages();
+            });
+
+            $video.ready(function(){
+                logging.log("video is ready");
+                $video.width($(window).width());
+                $video.height($(window).height());
+            });
         },
 
         /* Stop streaming */
@@ -164,27 +192,30 @@ define([
             return this.updateMessages();
         },
 
+        /* Set error */
+        setError: function(e) {
+            this.error = e;
+            return this.updateMessages();
+        },
+
         /* Set playing */
         setPlaying: function(l) {
             if (this.lock && l != false) return this;
 
-            this.playing = l;
-
-            if (this.playing) {
-                this.toolbarHide(4000);
+            if (l) {
                 this.video().play();
             } else {
-                this.toolbarShow();
                 this.video().pause();
             }
-            return this.updateMessages();
+            return this;
         },
 
         /* update message */
         updateMessages: function() {
-            this.$(".message.wait").toggle(this.lock);
-            this.$(".message.pause").toggle(!this.playing && !this.lock);
+            this.$(".message.wait").toggle(this.error == 0 && this.lock);
+            this.$(".message.pause").toggle(this.error == 0 && !this.playing && !this.lock);
 
+            this.$(".message.error-src").toggle(this.error == MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED);
             return this;
         },
 
@@ -192,7 +223,6 @@ define([
         show: function(movieid) {
             if (movieid != null) this.runStream(movieid);
             this.$el.addClass("active");
-
         },
 
         /* Hide player */
