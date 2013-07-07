@@ -46,7 +46,6 @@ define([
             27: "esc"
         };
         key = mapKeys[key];
-        console.log("remote control ", key);
         Mousetrap.trigger(key);
     });
 

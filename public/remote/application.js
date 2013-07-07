@@ -4,14 +4,11 @@ require([
     "yapp/yapp",
     "yapp/args",
     "vendors/socket.io",
+    "vendors/quo",
     "ressources/imports",
-], function(_, $, yapp, args, io) {
+], function(_, $, yapp, args, io, Quo) {
     // Configure yapp
-    yapp.configure(args, {
-         "logLevels": {
-
-        },
-    });
+    yapp.configure(args, {});
 
     // Define base application
     var Application = yapp.Application.extend({
@@ -42,18 +39,30 @@ require([
         },
 
         finish: function() {
+            var self = this;
+            var r = $$(".swipe-container");
+            r.swipeLeft(function() {
+                self.sendTouch(37);
+            });
+            r.swipeRight(function() {
+                self.sendTouch(39);
+            });
+            r.swipeDown(function() {
+                self.sendTouch(40);
+            });
+            r.swipeUp(function() {
+                self.sendTouch(38);
+            });
+
             return Application.__super__.finish.apply(this, arguments);
         },
 
-        templateContext: function() {
-            return {}
-        },
-
         sendTouch: function(e) {
-            var key = 0;
-            e.preventDefault();
-            key = $(e.currentTarget).data("key");
-            console.log("send ", key);
+            var key = e;
+            if (!_.isNumber(e)) {
+                e.preventDefault();
+                key = $(e.currentTarget).data("key");
+            }
             this.socket.emit('remote_input', key);
         }
     });

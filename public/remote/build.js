@@ -36,5 +36,8 @@ exports.config = {
         'vendors/socket.io': {
             exports: 'io'
         },
+        'vendors/quo': {
+            exports: 'Quo'
+        }
     }
 };

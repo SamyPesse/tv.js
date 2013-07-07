@@ -123,7 +123,7 @@ require([
             this.components.player.hide();
             this.components.movies.recents();
             this.$(".header .search").val("");
-            this.focusSearch();
+            if (!TV.check()) this.focusSearch();
             return this;
         },
 
