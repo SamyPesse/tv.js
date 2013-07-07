@@ -156,6 +156,11 @@ define([
                 $video.width($(window).width());
                 $video.height($(window).height());
             });
+
+            $(window).resize(function() {
+                $video.width($(window).width());
+                $video.height($(window).height());
+            });
         },
 
         /* Stop streaming */
