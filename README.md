@@ -72,5 +72,6 @@ Follow [this tutorial](http://blog.rueedlinger.ch/2013/03/raspberry-pi-and-nodej
 
     rake build
     rake run
+    chromium --kiosk http://localhost:8888
 
 
