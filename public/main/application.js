@@ -20,10 +20,9 @@ require([
 
     // Define base application
     var Application = yapp.Application.extend({
-        name: "Movies",
+        name: "tv.js",
         template: "main.html",
         metas: {
-            "description": "Searching and watching movies made easy",
             "viewport": "width=device-width, initial-scale=1, maximum-scale=1"
         },
         links: {

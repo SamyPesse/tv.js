@@ -1,7 +1,7 @@
 {
     "author": "Samy Pesse",
-    "name": "cinema.js",
-    "description": "Searching and watching movies made easy.",
+    "name": "tv.js",
+    "description": "Smart TV with P2P streaming in JS (Node/Chrome).",
     "version": "0.0.1",
     "dependencies": {
         "q": "0.9.6",
@@ -24,5 +24,10 @@
     "bin": {
         "movies.js": "bin/run.js"
     },
-    "contributors": []
+    "contributors": [
+        {
+            "name": "Aaron O'Mullan",
+            "email": "aaron.omullan@gmail.com"
+        }
+    ]
 }

@@ -8,7 +8,7 @@ exports.config = {
     "baseUrl": "/",
 
     // Application name
-    "name": "Movies",
+    "name": "Main",
 
     // Mode debug
     "debug": true,
