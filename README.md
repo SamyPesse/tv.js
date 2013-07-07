@@ -15,7 +15,7 @@ This application is the result of a 24h personal hackathon (7 july 2013) by Aaro
 
 ![screen](https://raw.github.com/SamyPesse/movies/master/screens/3.png)
 
-![screen](https://raw.github.com/SamyPesse/movies/master/screens/4.png)
+![screen](https://raw.github.com/SamyPesse/movies/master/screens/5.png)
 
 
 ## How to use it on your computer ?
