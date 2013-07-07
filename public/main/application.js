@@ -5,10 +5,11 @@ require([
 
     "utils/navigation",
     "utils/tv",
+    "utils/updates",
 
     "views/imports",
     "ressources/imports",
-], function(_, yapp, args, Navigation, TV) {
+], function(_, yapp, args, Navigation, TV, Updates) {
     // Configure yapp
     yapp.configure(args, {
          "logLevels": {
