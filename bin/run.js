@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var createServer = require('../').server.createServer;
+var startServer = require('../').server.startServer;
 
 // Start server
-createServer().listen(process.env.PORT || 8888);
+startServer(process.env.PORT || 8888);

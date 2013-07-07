@@ -13,7 +13,7 @@
         "socket.io": "0.9.16",
 
         "fluent-ffmpeg": "1.5.2",
-        "peerflix": "0.0.37"
+        "peerflix": "git+https://github.com/AaronO/peerflix.git"
     },
     "engines": {
         "node": "0.8.x",
