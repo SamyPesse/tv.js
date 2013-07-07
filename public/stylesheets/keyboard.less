@@ -1,8 +1,8 @@
 .keyboard {
     position: fixed;
     z-index: 10;
-    height: 370px;
-    bottom: -370px;
+    height: 390px;
+    bottom: -390px;
     right: 0px;
     left: 0px;
     background: rgba(0, 0, 0, 0.8);
@@ -25,6 +25,7 @@
     .key {
         display: inline-block;
         background: rgba(0, 0, 0, 0.8);
+        .border-radius(2px);
         border: 2px solid transparent;
         padding: 14px 18px;
         margin: 4px;
@@ -36,6 +37,12 @@
         /* spacebar */
         &.key-32 {
             padding: 14px 300px;
+        }
+
+        /* back */
+        &.key-8 {
+            color: #e74c3c;
+            padding: 14px 50px;
         }
 
         &.active {
