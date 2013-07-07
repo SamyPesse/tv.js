@@ -1,0 +1,29 @@
+@import "../../stylesheets/reset.less";
+
+@import "player.less";
+@import "keyboard.less";
+@import "movies.less";
+
+
+.header {
+    height: 80px;
+    position: relative;
+    background: #000;
+
+    .search {
+        position: absolute;
+        right: 20px;
+        left: 20px;
+        font-size: 40px;
+        line-height: 40px;
+        top: 10px;
+        border: none;
+        .box-shadow(none);
+        background: none;
+        border-bottom: 2px solid #fff;
+        color: #fff;
+        font-family: inherit;
+        font-weight: 100;
+        outline: none;
+    }
+}

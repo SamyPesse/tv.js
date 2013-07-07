@@ -1,3 +1,4 @@
 node_modules/
-public/build/
+public/main/build/
+public/remote/build/
 /movies/
