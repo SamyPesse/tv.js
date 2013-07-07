@@ -1,0 +1,21 @@
+<div class="inner">
+    <% 
+    var i = 0;
+    _.each(lines, function(keycodes) { %>
+    <div class="line">
+        <% _.each(keycodes, function(code) { %>
+            <div data-index="<%- i %>" data-keycode="<%- code %>" class="key key-<%- code %>">
+                <% if (code == 8) { %>
+                &larr;
+                <% } else if (code == 32) { %>
+                &mdash;
+                <% } else { %>
+                <%= String.fromCharCode(code) %>
+                <% } %>
+            </div>
+        <% 
+        i = i + 1;
+        }); %>
+    </div>
+    <% }); %>
+</div>

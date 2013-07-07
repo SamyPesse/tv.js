@@ -4,10 +4,11 @@ require([
     "yapp/args",
 
     "utils/navigation",
+    "utils/tv",
 
     "views/imports",
     "ressources/imports",
-], function(_, yapp, args, Navigation) {
+], function(_, yapp, args, Navigation, TV) {
     // Configure yapp
     yapp.configure(args, {
          "logLevels": {
@@ -33,7 +34,8 @@ require([
             "play/:id": "routePlay",
         },
         events: {
-            "keyup .header .search": "searchInput",
+            "keydown .header .search": "searchKeydown",
+            "keyup .header .search": "searchKeyup",
         },
 
         initialize: function() {
@@ -53,7 +55,8 @@ require([
             var only = function(mode, callback, context) {
                 callback = _.bind(callback, context);
                 return function() {
-                    if (self.page == mode) {
+                    if (self.page == mode
+                    && !self.components.keyboard.isOpen()) {
                         callback();
                     }
                 }
@@ -61,24 +64,40 @@ require([
             var except = function(mode, callback, context) {
                 callback = _.bind(callback, context);
                 return function() {
-                    if (self.page != mode) {
+                    if (self.page != mode
+                    && !self.components.keyboard.isOpen()) {
                         callback();
                     }
                 }
             };
 
             // esc : return to homepage
-            Navigation.bind('esc', _.bind(this.goHome, this));
+            Navigation.bind('esc', _.bind(function() {
+                if (this.components.keyboard.isOpen()) {
+                    this.components.movies.focus();
+                } else {
+                    this.goHome();
+                }
+                
+                
+                //this.components.keyboard.hide();
+            }, this));
 
             // movies : navigation
             Navigation.bind('right', except("player", this.components.movies.selectionRight, this.components.movies));
             Navigation.bind('left', except("player", this.components.movies.selectionLeft, this.components.movies));
             Navigation.bind('up', except("player", this.components.movies.selectionUp, this.components.movies));
             Navigation.bind('down', except("player", this.components.movies.selectionDown, this.components.movies));
-            Navigation.bind('enter', except("player", this.components.movies.actionSelection, this.components.movies));
+            Navigation.bind(['enter', 'space'], except("player", this.components.movies.actionSelection, this.components.movies));
 
             // player
-            Navigation.bind("space", only("player", this.components.player.togglePlay,  this.components.player));
+            Navigation.bind(['enter', 'space'], only("player", this.components.player.togglePlay,  this.components.player));
+
+            // Bind keyboard to search
+            this.components.keyboard.bindTo(this.$(".header .search"));
+            /*this.components.keyboard.on("close", function() {
+                
+            }, this);*/
 
             return Application.__super__.finish.apply(this, arguments);
         },
@@ -135,18 +154,25 @@ require([
          *  Search input : keydown on search bar
          *      -> down|enter : go to list  
          */
-        searchInput: function(e) {
+        searchKeyup: function(e) {
             var listCodes = [
                 13 /* enter */,
                 40 /* down */
             ];
             var code = (e.keyCode ? e.keyCode : e.which);
-            if (code == 27 /* esc */) {
-                this.goHome();
-            } else if (_.contains(listCodes, code)) {
-                this.components.movies.focus();
+            if (!TV.check()) {
+                if (code == 27 /* esc */) {
+                    this.goHome();
+                } else if (_.contains(listCodes, code)) {
+                    this.components.movies.focus();
+                }
             }
             this.doSearch();
+        },
+        searchKeydown: function(e) {
+            if (TV.check()) {
+                e.preventDefault();
+            }
         },
     });
 
