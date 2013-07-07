@@ -1,4 +1,4 @@
-tv.js : Smart TV with P2P streaming
+tv.js : Apple TV for Torrent Streaming
 ====
 
 ![screen](https://raw.github.com/SamyPesse/movies/master/screens/2.png)
@@ -14,6 +14,8 @@ Tv.js is the result of a 24h personal hackathon (7th of July 2013) by Aaron O'Mu
 It's designed to run on a TV screen (through HDMI), but works just as well on a laptop. (it's entirely usuable with keyboard controls alone)
 
 You can see a video of it working here on Youtube: [https://www.youtube.com/watch?v=j71NCZnLffg](https://www.youtube.com/watch?v=j71NCZnLffg)
+
+Downloading copyrighted material through torrents may be illegal in your country.
 
 ![screen](https://raw.github.com/SamyPesse/movies/master/screens/1.png)
 
