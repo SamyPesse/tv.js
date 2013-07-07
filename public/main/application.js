@@ -76,7 +76,7 @@ require([
                 if (this.components.keyboard.isOpen()) {
                     this.components.movies.focus();
                 } else {
-                    this.goHome();
+                    this.router.navigate("home");
                 }
             }, this));
 
@@ -138,12 +138,6 @@ require([
             return this;
         },
 
-        /* Return to home page */
-        goHome: function() {
-            this.router.navigate("home");
-            return this;
-        },
-
         /* Focus search bar */
         focusSearch: function() {
             this.$(".header .search").focus();
@@ -169,7 +163,7 @@ require([
             var code = (e.keyCode ? e.keyCode : e.which);
             if (!TV.check()) {
                 if (code == 27 /* esc */) {
-                    this.goHome();
+                    this.router.navigate("home");
                 } else if (_.contains(listCodes, code)) {
                     this.components.movies.focus();
                 }
