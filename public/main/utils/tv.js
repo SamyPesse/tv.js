@@ -1,12 +1,14 @@
 define([
-    'vendors/mousetrap'
-], function (Mousetrap) {
+
+], function () {
     var TV = {
+        enabled: true,
+
         /*
          *  Check if display is a TV
          */
         check: function() {
-            return true;
+            return TV.enabled;
         }
     };
     return TV;

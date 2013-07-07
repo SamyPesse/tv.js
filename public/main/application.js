@@ -95,9 +95,19 @@ require([
 
             // Bind keyboard to search
             this.components.keyboard.bindTo(this.$(".header .search"));
-            /*this.components.keyboard.on("close", function() {
-                
-            }, this);*/
+            
+            // Get tv ip
+            yapp.Requests.getJSON("/api/ip").done(_.bind(function(data) {
+                this.$(".intro .ip").text(data.ip);
+            }, this));
+
+            // Bind remote
+            Updates.on("remote:start", function() {
+                this.$(".intro").hide();
+            }, this);
+            Updates.on("remote:end", function() {
+                this.$(".intro").show();
+            }, this);
 
             return Application.__super__.finish.apply(this, arguments);
         },
