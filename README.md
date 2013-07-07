@@ -1,11 +1,18 @@
 movies
 ====
 
-TV interface for watching movies.
-Use iTunes for finding movies informations (maybe change source to another in the future for getting more movies) and Torrent for downloading movies.
+![screen](https://raw.github.com/SamyPesse/movies/master/screens/2.png)
+
+Complete TV interface for unlimited watching in streaming movies.
+Use iTunes for finding movies informations and BitTorrent for downloading and streaming movies.
+
+It runs a server which can run in a Raspberry Pi and the UI can be controlled by a smartphone (no need of keyboard or mouse).
 
 
-![chrome](https://raw.github.com/SamyPesse/movies/master/screens/chrome.png)
+![screen](https://raw.github.com/SamyPesse/movies/master/screens/1.png)
+
+![screen](https://raw.github.com/SamyPesse/movies/master/screens/3.png)
+
 
 ## How to use it on your computer ?
 
@@ -16,8 +23,6 @@ For using it on your computer, simply run :
 
 And go to localhost:8888 on your browser
 
-
-![chrome](https://raw.github.com/SamyPesse/movies/master/screens/tv.png)
 
 ## How to install it on your TV ?
 
