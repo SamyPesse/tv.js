@@ -12,10 +12,10 @@ define([
             this.socket = io.connect(this.url);
 
             // Video streaming stats
-            this.socket.on('stats', function(data) {
+            this.socket.on('stats', _.bind(function(data) {
                 //logging.log("streaming stats ", data);
                 this.trigger("streaming:stats", data);
-            });
+            }, this));
 
             // Remote control connected
             this.socket.on('remote', _.bind(function() {
