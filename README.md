@@ -38,7 +38,7 @@ To build and run the app, you'll need :
     ffmpeg
 
 
-To build and run the all :
+To build and run the app :
 
     rake install
     rake
