@@ -4,41 +4,47 @@ define([
     "vendors/socket.io"
 ], function(_, yapp, io) {
     var logging = yapp.Logger.addNamespace("updates");
+    var Updates = new (yapp.Class.extend({
+        /* Constructor */
+        initialize: function() {
+            this.url = [window.location.protocol, '//', window.location.host].join('');
+            logging.log("Connexion to "+this.url);
+            this.socket = io.connect(this.url);
 
-    var url = [window.location.protocol, '//', window.location.host].join('');
-    var Updates = new (yapp.Class.extend({}));
+            // Video streaming stats
+            this.socket.on('stats', function(data) {
+                //logging.log("streaming stats ", data);
+                this.trigger("streaming:stats", data);
+            });
 
-    logging.log("Connexion to "+url);
+            // Remote control connected
+            this.socket.on('remote', _.bind(function() {
+                logging.log("remote is connected");
+                this.trigger("remote:start");
+            }, this));
 
-    Updates.socket = io.connect(url);
+            // Touch input from remote
+            this.socket.on('remote_input', _.bind(function(data) {
+                logging.log("remote input ", data);
+                this.trigger("remote:input", data);
+            }, this));
 
-    // Video streaming stats
-    Updates.socket.on('stats', function(data) {
-        //logging.log("streaming stats ", data);
-        Updates.trigger("streaming:stats", data);
-    });
+            // Search from remote
+            this.socket.on('remote_search', _.bind(function(q) {
+                logging.log("remote search ", q);
+                this.trigger("remote:search", q);
+                yapp.History.navigate("search/:q", {
+                    "q": q
+                });
+            }, this));
 
-    // Remote control
-    Updates.socket.on('remote', function() {
-        logging.log("remote is connected");
-        Updates.trigger("remote:start");
-    });
-    Updates.socket.on('remote_input', function(data) {
-        logging.log("remote input ", data);
-        Updates.trigger("remote:input", data);
-    });
-    Updates.socket.on('remote_search', function(q) {
-        logging.log("remote search ", q);
-        Updates.trigger("remote:search", q);
-        yapp.History.navigate("search/:q", {
-            "q": q
-        });
-    });
-
-    // Connexion error
-    Updates.socket.on('error', function(data) {
-        logging.error("error in socket.io")
-    });
+            // Connexion error
+            this.socket.on('error', _.bind(function(data) {
+                logging.error("error in socket.io")
+            }, this));
+            return this;
+        },
+    }));
 
     return Updates;
 });

@@ -31,8 +31,8 @@
         }
     ],
 
-    "node-main": "bin/run.js",
     "main": "http://localhost:8888",
+    "node-main": "bin/run.js",
     "window": {
         "title": "Tv.js",
         "icon": "public/main/build/static/images/logo_48.png",

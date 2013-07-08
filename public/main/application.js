@@ -36,7 +36,8 @@ require([
         events: {
             "keydown .header .search": "searchKeydown",
             "keyup .header .search": "searchKeyup",
-            "click .intro": "disableTv"
+            "click .intro": "disableTv",
+            "click .close": "exit"
         },
 
         initialize: function() {
@@ -113,6 +114,10 @@ require([
                 this.$(".intro").show();
             }, this);
 
+            // Bind TV
+            TV.on("state", this.toggleTv, this);
+            this.toggleTv();
+
             return Application.__super__.finish.apply(this, arguments);
         },
 
@@ -186,8 +191,21 @@ require([
 
         /* (event) Disable tv */
         disableTv: function() {
-            TV.enabled = false;
-            this.$(".intro").hide();
+            TV.toggle(false);
+            return this;
+        },
+
+        /* (event) TV toggled */
+        toggleTv: function() {
+            this.$(".close").toggle(!TV.enabled);
+            if (TV.enabled == false) this.$(".intro").hide();
+        },
+
+        /* (event) Exit application */
+        exit: function(e) {
+            if (e != null) e.preventDefault();
+            //yapp.Requests.get("api/exit")
+            window.close();
         }
     });
 
