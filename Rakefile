@@ -9,7 +9,7 @@ desc "install dependencies using npm"
 task :install do
     check 'npm', 'NPM', 'https://npmjs.org/'
     system 'npm install .'
-    system 'npm install -g git://github.com/FriendCode/yapp.js.git#master'
+    system 'sudo -H npm install -g git://github.com/FriendCode/yapp.js.git#master'
 end
 
 desc "run server"
