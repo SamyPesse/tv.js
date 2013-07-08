@@ -3,6 +3,7 @@ SHELL = bash
 NODE = $(shell which node)
 NPM = $(shell which npm)
 YAPP = $(shell which yapp.js)
+UNAME_S = $(shell uname -s)
 
 .PHONY: all
 
@@ -23,7 +24,11 @@ ifeq ($(NPM),)
 	@exit 1
 else
 	@npm install .
-	@sudo -H npm install -g "git://github.com/FriendCode/yapp.js.git#master"
+ifeq ($(UNAME_S),Darwin)
+	@npm install -g "git+https://github.com/FriendCode/yapp.js.git#master"
+else
+	@sudo -H npm install -g "git+https://github.com/FriendCode/yapp.js.git#master"
+endif
 endif
 
 run:
