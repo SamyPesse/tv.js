@@ -29,5 +29,24 @@
             "name": "Aaron O'Mullan",
             "email": "aaron.omullan@gmail.com"
         }
-    ]
+    ],
+
+    "node-main": "bin/run.js",
+    "window": {
+        "icon": "link.png",
+        "toolbar": false,
+        "frame": false,
+        "width": 800,
+        "height": 500,
+        "position": "mouse",
+        "min_width": 400,
+        "min_height": 200,
+        "max_width": 800,
+        "max_height": 600,
+        "resizable": true,
+        "fullscreen": true
+    },
+    "webkit": {
+        "plugin": true
+    }
 }
