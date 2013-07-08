@@ -18,6 +18,12 @@ task :run do
     system 'node bin/run.js'
 end
 
+desc "open application"
+task :open => :build do
+    check 'nw', 'node-webkit', 'https://github.com/rogerwang/node-webkit'
+    system 'nw .'
+end
+
 task :default => ['build', 'run']
 
 # Check for the existence of an executable.
