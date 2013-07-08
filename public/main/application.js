@@ -204,7 +204,7 @@ require([
         /* (event) Exit application */
         exit: function(e) {
             if (e != null) e.preventDefault();
-            //yapp.Requests.get("api/exit")
+            yapp.Requests.post("/api/exit")
             window.close();
         }
     });
