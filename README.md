@@ -34,20 +34,20 @@ Downloading copyrighted material through torrents may be illegal in your country
 To build and run the app, you'll need :
 
     node
-    rake
+    make
     ffmpeg
 
 
-To build and run the all :
+To build and run the app :
 
-    rake install
-    rake
+    make install
+    make
 
 And go to [http://localhost:8888](http://localhost:8888) on your browser
 
 Or simply run the server without rebuilding the client with :
 
-    rake run
+    make run
 
 
 ## How to install it on your TV ?
@@ -77,12 +77,12 @@ Follow [this tutorial](http://blog.rueedlinger.ch/2013/03/raspberry-pi-and-nodej
 
     export DISPLAY=:0.0
     git clone https://github.com/SamyPesse/tv.js.git && cd tv.js
-    rake install
+    make install
 
 #### 4. Build and run tv.js
 
-    rake build
-    rake run
+    make build
+    make run
     chromium --kiosk http://localhost:8888
 
 
