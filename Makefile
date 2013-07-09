@@ -2,7 +2,7 @@ SHELL = bash
 
 NODE = $(shell which node)
 NPM = $(shell which npm)
-YAPP = $(shell which yapp.js)
+YAPP = $(shell npm list | grep yapp)
 
 .PHONY: all
 
@@ -13,7 +13,11 @@ ifeq ($(NPM),)
 	@echo -e "npm not found.\nInstall it from https://npmjs.org/"
 	@exit 1
 else
+ifeq ($(YAPP),)
+	@echo -e "yapp is not installed. Run 'make install' to install all dependencies."
+else
 	@-npm build
+endif
 endif
 
 install:
