@@ -22,7 +22,6 @@ exports.config = {
     // Static files
     "static": {
         "templates": path.resolve(__dirname, "ressources", "templates"),
-        "images": path.resolve(__dirname, "ressources", "images"),
     },
 
     // Stylesheets
