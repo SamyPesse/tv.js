@@ -183,6 +183,11 @@ require([
             }
             this.doSearch();
         },
+
+        /*
+         *  Keydown on search input
+         *      -> on tv : prevent default
+         */
         searchKeydown: function(e) {
             if (TV.check()) {
                 e.preventDefault();

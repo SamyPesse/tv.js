@@ -13,7 +13,7 @@ define([
 
             // Video streaming stats
             this.socket.on('stats', _.bind(function(data) {
-                //logging.log("streaming stats ", data);
+                logging.log("streaming stats ", data);
                 this.trigger("streaming:stats", data);
             }, this));
 

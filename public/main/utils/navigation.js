@@ -36,6 +36,7 @@ define([
         },
     };
 
+    // Handle remote control
     Updates.on("remote:input", function(key) {
         var mapKeys = {
             38: "up",

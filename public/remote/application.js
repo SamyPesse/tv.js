@@ -17,12 +17,6 @@ require([
         metas: {
             "viewport": "width=device-width, initial-scale=1, maximum-scale=1"
         },
-        links: {
-
-        },
-        routes: {
-            
-        },
         events: {
             "click .touch": "sendTouch",
             "keyup .search": "sendSearch"

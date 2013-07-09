@@ -1,4 +1,5 @@
 var path = require("path");
+var config = require("../../config");
 
 exports.config = {
     // Base directory
@@ -11,7 +12,7 @@ exports.config = {
     "name": "Main",
 
     // Mode debug
-    "debug": true,
+    "debug": config.debug,
 
     // Main entry file
     "main": "application",
