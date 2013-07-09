@@ -1,7 +1,7 @@
 tv.js : Apple TV for Torrent Streaming
 ====
 
-![screen](https://raw.github.com/SamyPesse/movies/master/screens/2.png)
+[https://raw.github.com/SamyPesse/movies/master/screens/2b.png](![screen](https://raw.github.com/SamyPesse/movies/master/screens/2.png))
 
 A Smart TV application to stream movies using BitTorrent. (Yes it actually streams them in order even though it's BitTorrent)
 
@@ -17,13 +17,13 @@ You can see a video of it working here on Youtube: [https://www.youtube.com/watc
 
 Downloading copyrighted material through torrents may be illegal in your country.
 
-![screen](https://raw.github.com/SamyPesse/movies/master/screens/1.png)
+[https://raw.github.com/SamyPesse/movies/master/screens/1b.png](![screen](https://raw.github.com/SamyPesse/movies/master/screens/1.png))
 
-![screen](https://raw.github.com/SamyPesse/movies/master/screens/3.png)
+[https://raw.github.com/SamyPesse/movies/master/screens/3b.png](![screen](https://raw.github.com/SamyPesse/movies/master/screens/3.png))
 
-![screen](https://raw.github.com/SamyPesse/movies/master/screens/5.png)
+[https://raw.github.com/SamyPesse/movies/master/screens/4b.png](![screen](https://raw.github.com/SamyPesse/movies/master/screens/4.png))
 
-![screen](https://raw.github.com/SamyPesse/movies/master/screens/6.png)
+[https://raw.github.com/SamyPesse/movies/master/screens/5b.png](![screen](https://raw.github.com/SamyPesse/movies/master/screens/5.png))
 
 
 
