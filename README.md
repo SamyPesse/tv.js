@@ -11,7 +11,7 @@ It runs as a server which can run on a Raspberry Pi and the UI can be controlled
 
 Tv.js is the result of a 24h personal hackathon (7th of July 2013) by Aaron O'Mullan (@AaronO) and me (@SamyPesse).
 
-It's designed to run on a TV screen (through HDMI), but works just as well on a laptop. (it's entirely usuable with keyboard controls alone)
+It's designed to run on a TV screen (through HDMI), but works just as well on a laptop. (it's entirely usable with keyboard controls alone)
 
 You can see a video of it working here on Youtube: [https://www.youtube.com/watch?v=j71NCZnLffg](https://www.youtube.com/watch?v=j71NCZnLffg)
 
@@ -96,14 +96,14 @@ tv.js needs ffmpeg to convert the videos to ogv, make sure you have ffmpeg insta
 
 
 ## Todo
-    - Use IMBD or another API with a bigger movie collection that Itunes'
+    - Use IMBD or another API with a bigger movie collection than Itunes'
     - Cache converted videos
     - Improve overall stability
     - Improve torrent picking algorithm (by seeds/leechers, size, votes, video format ...)
     - Package using NodeWebkit for Windows/Mac/Linux/Raspberry PI
-    - Add other awesone stuff !
+    - Add other awesome stuff!
 
 
 ## Disclaimer
 
-There are obvious legal issues, with downloading copyrighted material you do not have a license for. We do not endorse such use cases and bare no responsability for the use people make of it.
+There are obvious legal issues, with downloading copyrighted material you do not have a license for. We do not endorse such use cases and take no responsibility for the use people make of it.
