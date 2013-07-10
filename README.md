@@ -53,7 +53,7 @@ Or simply run the server without rebuilding the client with :
 ## How to install it on your TV ?
 
 This application has been built and designed to run on a TV screen using a Raspberry Pi.
-Follow [this tutorial](https://github.com/SamyPesse/tv.js/blob/master/rapsberrypi/README.md) to install TV.js on your Rapsberry Pi
+Follow [this tutorial](https://github.com/SamyPesse/tv.js/blob/master/raspberrypi/README.md) to install TV.js on your Raspberry Pi
 
 ## How to install ffmpeg ?
 
@@ -70,6 +70,7 @@ tv.js needs ffmpeg to convert the videos to ogv, make sure you have ffmpeg insta
     - Improve overall stability
     - Improve torrent picking algorithm (by seeds/leechers, size, votes, video format ...)
     - Package using NodeWebkit for Windows/Mac/Linux/Raspberry PI
+    - Correct boot on Raspberry Pi
     - Add other awesome stuff!
 
 

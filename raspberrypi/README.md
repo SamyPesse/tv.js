@@ -1,4 +1,4 @@
-Install TV.js on a Rapsberry Pi
+Install TV.js on a Raspberry Pi
 ====
 
 ## Software Stack:
@@ -9,15 +9,15 @@ Install TV.js on a Rapsberry Pi
     ffmpeg
     Chromium Browser
 
-## 1. Connect to ssh to your Rapsberry Pi:
+## 1. Connect to ssh to your Raspberry Pi:
 
-We are not going to use a keyboard for installing TV.js on the Rapsberry Pi but ssh, first we need to find the Rapsberry Pi IP address, for this we are going to use nmap
+We are not going to use a keyboard for installing TV.js on the Raspberry Pi but ssh, first we need to find the Raspberry Pi IP address, for this we are going to use nmap
 
 #### Install nmap on mac using :
 
 	brew install nmap
 
-#### Run nmap to find the Rapsberry Pi IP :
+#### Run nmap to find the Raspberry Pi IP :
 
 	nmap -A -T4 192.168.0.1-254 
 
@@ -62,7 +62,7 @@ Yo need now to logout and log in again, so that the changed path variable will w
 
 	sudo shutdown -r now
 
-After that, rconnect with ssh to the rapsberry ip.
+After that, rconnect with ssh to the raspberry ip.
 
 ## 5. Installing rake
 
@@ -118,7 +118,7 @@ Start chromium in kiosk mode :
 
 Add the start script to init.d :
 
-	sudo cp rapsberrypi/tvjs.sh /etc/init.d
+	sudo cp raspberrypi/tvjs.sh /etc/init.d
 	sudo chmod 755 /etc/init.d/tvjs.sh
 	sudo update-rc.d tvjs.sh defaults
 
@@ -129,7 +129,7 @@ Test the script :
 
 ## 11. Update TV.js
 
-If you want the latest version of TV.js to run on you Rapsberry Pi, just run :
+If you want the latest version of TV.js to run on you Raspberry Pi, just run :
 
 	sudo /etc/init.d/tvjs.sh update
 	

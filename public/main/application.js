@@ -72,7 +72,7 @@ require([
 
             // Get TV ip
             yapp.Requests.getJSON("/api/ip").done(_.bind(function(data) {
-                this.$(".intro .ip").text(data.ip);
+                this.$(".intro .ip").text(data.ip+":"+data.port);
             }, this));
 
             // Bind keyboard to search
