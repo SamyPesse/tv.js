@@ -109,8 +109,8 @@ Start chromium in kiosk mode :
 
 Add the start script to init.d :
 
-	chmod 755 rapsberrypi/tvjs.sh
 	sudo cp rapsberrypi/tvjs.sh /etc/init.d
+	sudo chmod 755 /etc/init.d/tvjs.sh
 	sudo update-rc.d tvjs.sh defaults
 
 Test the script :
