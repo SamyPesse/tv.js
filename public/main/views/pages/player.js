@@ -3,11 +3,10 @@ define([
     "jQuery",
     "yapp/yapp",
     "vendors/video",
-    "utils/updates"
-], function(_, $, yapp, $video, Updates) {
+    "utils/updates",
+    "views/page"
+], function(_, $, yapp, $video, Updates, Page) {
     var logging = yapp.Logger.addNamespace("player");
-
-    var STREAM_URL = "/api/stream";
 
     var toHHMMSS = function (sec_num) {
         sec_num = Math.floor(sec_num);
@@ -24,14 +23,24 @@ define([
 
 
     // List Item View
-    var Player = yapp.View.extend({
-        className: "player",
-        template: "player.html",
-        events: {
-            
+    var PlayerPage = Page.extend({
+        pageId: "player",
+        routes: ["play/:id"],
+        className: "page-player",
+        template: "pages/player.html",
+        navigation: {
+            "enter": "togglePlay",
+            "right": function() {
+                this.setPlaySpeed(null, 0.25);
+            },
+            "left": function() {
+                this.setPlaySpeed(null, -0.25);
+            }
         },
+
+        /* Constructor */
         initialize: function() {
-            Player.__super__.initialize.apply(this, arguments);
+            PlayerPage.__super__.initialize.apply(this, arguments);
             this.toolbarTimeout = null;
             this.streamReady = false;
             this.playing = false;
@@ -41,14 +50,22 @@ define([
             this.speed = 1;
             this.lock = true;
             this.error = 0;
+            this.streamid = this.options.args[0];
 
+            // Bind realtime updates
             Updates.on("streaming:stats", this.setStats, this);
+
             return this;
         },
 
+        /* Finish rendering */
         finish: function() {
             this.updateMessages();
-            return Player.__super__.finish.apply(this, arguments);
+
+            // Start streaming
+            if (this.streamid != null) this.runStream(this.streamid);
+            this.active();
+            return PlayerPage.__super__.finish.apply(this, arguments);
         },
 
         /* Set play speed */
@@ -121,8 +138,7 @@ define([
         addStream: function() {
             var self = this;
             var $video = this.video();
-            //$video.src({ type: "video/mp4", src: "http://video-js.zencoder.com/oceans-clip.mp4" });
-            $video.src({ type: "video/ogg", src: STREAM_URL });
+            $video.src({ type: "video/ogg", src: "/api/stream" });
             $video.on("durationchange", function () {
                 logging.log("duration change");
                 self.duration = $video.duration();
@@ -228,7 +244,7 @@ define([
             return this;
         },
 
-        /* update message */
+        /* Update message */
         updateMessages: function() {
             this.$(".message.wait").toggle(this.error == 0 && this.lock);
             this.$(".message.pause").toggle(this.error == 0 && !this.playing && !this.lock);
@@ -242,20 +258,13 @@ define([
             return this;
         },
 
-        /* Show player */
-        show: function(movieid) {
-            if (movieid != null) this.runStream(movieid);
-            this.$el.addClass("active");
-        },
-
-        /* Hide player */
-        hide: function() {
+        /*
+         *  Player page is closed : stop streaming
+         */
+        closePage: function() {
             this.stopStreaming();
-            this.$el.removeClass("active");
         }
     });
 
-    yapp.View.Template.registerComponent("player", Player);
-
-    return Player;
+    return PlayerPage;
 });

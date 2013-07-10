@@ -30,12 +30,10 @@ define([
             }, this));
 
             // Search from remote
-            this.socket.on('remote_search', _.bind(function(q) {
-                logging.log("remote search ", q);
-                this.trigger("remote:search", q);
-                yapp.History.navigate("search/:q", {
-                    "q": q
-                });
+            this.socket.on('remote_navigate', _.bind(function(page) {
+                logging.log("remote navigate ", page);
+                this.trigger("remote:search", page);
+                yapp.History.navigate(page);
             }, this));
 
             // Connexion error

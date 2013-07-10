@@ -7,9 +7,11 @@ require([
     "utils/tv",
     "utils/updates",
 
+    "views/pages",
+
     "views/imports",
     "ressources/imports",
-], function(_, yapp, args, Navigation, TV, Updates) {
+], function(_, yapp, args, Navigation, TV, Updates, pages) {
     // Configure yapp
     yapp.configure(args, {
          "logLevels": {
@@ -29,9 +31,7 @@ require([
             "icon": yapp.Urls.static("images/logo_48.png")
         },
         routes: {
-            "*actions": "routeHome",
-            "search/:q": "routeSearch",
-            "play/:id": "routePlay",
+            "*actions": "errorPage"
         },
         events: {
             "keydown .header .search": "searchKeydown",
@@ -42,7 +42,15 @@ require([
 
         initialize: function() {
             Application.__super__.initialize.apply(this, arguments);
-            this.page = null;
+            this.currentPage = null;
+            
+            // Bind all pages
+            _.each(pages, function(pageView) {
+                this.addPageView(pageView);
+            }, this);
+
+
+
             this.doSearch = _.debounce(function() {
                 q = this.$(".header .search").val();
                 this.router.navigate("search/:q", {
@@ -53,58 +61,22 @@ require([
         },
 
         finish: function() {
-            var self = this;
-            var only = function(mode, callback, context) {
-                callback = _.bind(callback, context);
-                return function() {
-                    if (self.page == mode
-                    && !self.components.keyboard.isOpen()) {
-                        callback();
-                    }
-                }
-            };
-            var except = function(mode, callback, context) {
-                callback = _.bind(callback, context);
-                return function() {
-                    if (self.page != mode
-                    && !self.components.keyboard.isOpen()) {
-                        callback();
-                    }
-                }
-            };
-
-            // esc : return to homepage
-            Navigation.bind('esc', _.bind(function() {
+            // Bind ESC
+            Navigation.bind('esc', function() {
                 if (this.components.keyboard.isOpen()) {
-                    this.components.movies.focus();
+                    this.blurSearch();
                 } else {
-                    this.router.navigate("home");
+                    this.errorPage();
                 }
-            }, this));
+            }, this);
 
-            // movies : navigation
-            Navigation.bind('right', except("player", this.components.movies.selectionRight, this.components.movies));
-            Navigation.bind('left', except("player", this.components.movies.selectionLeft, this.components.movies));
-            Navigation.bind('up', except("player", this.components.movies.selectionUp, this.components.movies));
-            Navigation.bind('down', except("player", this.components.movies.selectionDown, this.components.movies));
-            Navigation.bind(['enter', 'space'], except("player", this.components.movies.actionSelection, this.components.movies));
-
-            // player
-            Navigation.bind(['enter', 'space'], only("player", this.components.player.togglePlay,  this.components.player));
-            Navigation.bind(['left'], only("player", function() {
-                this.setPlaySpeed(null, -0.25);
-            },  this.components.player));
-            Navigation.bind(['right'], only("player", function() {
-                this.setPlaySpeed(null, 0.25);
-            },  this.components.player));
-
-            // Bind keyboard to search
-            this.components.keyboard.bindTo(this.$(".header .search"));
-            
-            // Get tv ip
+            // Get TV ip
             yapp.Requests.getJSON("/api/ip").done(_.bind(function(data) {
                 this.$(".intro .ip").text(data.ip);
             }, this));
+
+            // Bind keyboard to search
+            this.components.keyboard.bindTo(this.$(".header .search"));
 
             // Bind remote
             Updates.on("remote:start", function() {
@@ -114,54 +86,81 @@ require([
                 this.$(".intro").show();
             }, this);
 
-            // Bind TV
             TV.on("state", this.toggleTv, this);
             this.toggleTv();
 
             return Application.__super__.finish.apply(this, arguments);
         },
 
-        templateContext: function() {
-            return {}
-        },
+        /*
+         *  Add page view to routing
+         *  @pageView : page view to add
+         */
+        addPageView: function(pageView) {
+            var routeName, uri, pageid, args, page;
 
-        /* Route 'home' */
-        routeHome: function(id) {
-            this.page = "home";
-            this.components.player.hide();
-            this.components.movies.recents();
-            this.$(".header .search").val("");
-            if (!TV.check()) this.focusSearch();
+            routes = _.isArray(pageView.prototype.routes) ? pageView.prototype.routes : [pageView.prototype.routes];
+            routeName = "page:"+pageView.prototype.pageId;
+
+            // Manage routes
+            this.on("route:"+routeName, function() {
+                args = _.values(arguments);
+                if (this.currentPage != null) this.currentPage.closePage();
+                this.currentPage = new pageView({
+                    args: args
+                }, this);
+                this.$(".body").empty();
+                this.currentPage.$el.appendTo(this.$(".body"));
+                this.currentPage.render();
+            }, this);
+
+            // Bind all routes
+            _.each(routes, function(route) {
+                this.route(route, routeName);
+            }, this);
             return this;
         },
 
-        /* Route 'search' */
-        routeSearch: function(q) {
-            this.page = "search";
-            this.$(".header .search").val(q);
-            this.components.player.hide();
-            this.components.movies.search(q);
+        /*
+         *  Active current page
+         */
+        activePage: function() {
+            if (this.currentPage != null) this.currentPage.active();
             return this;
         },
 
-        /* Route 'search' */
-        routePlay: function(id) {
-            this.page = "player";
-            this.components.player.show(id);
+        /*
+         *  Desactive current page
+         */
+        desactivePage: function() {
+            if (this.currentPage != null) this.currentPage.desactive();
             return this;
         },
 
-        /* Focus search bar */
+        /*
+         *  Page changes
+         */
+        errorPage: function() {
+            yapp.History.navigate("home");
+        },
+
+        /*
+         *  Focus on search bar : desactive current page
+         */
         focusSearch: function() {
             this.$(".header .search").focus();
             $('html, body').animate({
                 "scrollTop": 0
             }, 600);
+            this.desactivePage();
         },
 
-        /* Blur search bar */
+        /*
+         *  Blur from search bar : active current page
+         */
         blurSearch: function() {
             this.$(".header .search").blur();
+            this.activePage();
         },
 
         /*
@@ -178,7 +177,7 @@ require([
                 if (code == 27 /* esc */) {
                     this.router.navigate("home");
                 } else if (_.contains(listCodes, code)) {
-                    this.components.movies.focus();
+                    this.blurSearch();
                 }
             }
             this.doSearch();
@@ -194,6 +193,14 @@ require([
             }
         },
 
+        /*
+         *  Set search text
+         */
+        setSearchQuery: function(q) {
+            this.$(".header .search").val(q);
+            return this;
+        },
+
         /* (event) Disable tv */
         disableTv: function() {
             TV.toggle(false);
@@ -206,12 +213,14 @@ require([
             if (TV.enabled == false) this.$(".intro").hide();
         },
 
-        /* (event) Exit application */
+        /*
+         *  Exit application
+         */
         exit: function(e) {
             if (e != null) e.preventDefault();
             yapp.Requests.post("/api/exit")
             window.close();
-        }
+        },
     });
 
     var app = new Application();

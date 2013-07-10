@@ -35,9 +35,6 @@ exports.config = {
     "shim": {
         'vendors/socket.io': {
             exports: 'io'
-        },
-        'vendors/quo': {
-            exports: 'Quo'
         }
     }
 };

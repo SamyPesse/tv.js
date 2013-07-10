@@ -1,6 +1,10 @@
 @import "../../stylesheets/reset.less";
 
-@touchHeight: 50px;
+@touchVerticalHeight: 80px;
+
+@touchLateralWidth: 80px;
+@touchLateralHeight: 250px;
+
 @searchHeight: 50px;
 
 body {
@@ -25,7 +29,7 @@ body {
 
 .touch {
     position: fixed;
-    padding: 10px 30px;
+    padding: 0px 30px;
     font-weight: 200;
     font-size: 30px;
     line-height: 30px;
@@ -34,38 +38,64 @@ body {
     color: #fff;
     text-align: center;
     .box-sizing(border-box);
-    height: 50px;
+
+    &.up, &.down, &.right, &.left {
+        line-height: @touchVerticalHeight;
+        font-size: (@touchVerticalHeight/2);
+    }
 
     &.up {
-        right: 0px;
-        left: 0px;
+        right: @touchLateralWidth;
+        left: @touchLateralWidth;
         top: @searchHeight;
+        height: @touchVerticalHeight;
+        line-height: @touchVerticalHeight;
     }
 
     &.right {
-        right: 0px;
-        left: 0px;
-        top: (@searchHeight+@touchHeight);
+        .transform-origin(0%, 0%);
+        right: -@touchLateralHeight;
+        width: @touchLateralHeight;
+        height: @touchLateralWidth;
+        top: @searchHeight;
+        line-height: @touchLateralWidth;
+        .rotate(90deg); 
     }
 
     &.left {
-        right: 0px;
-        left: 0px;
-        top: (@searchHeight+2*@touchHeight);
+        .transform-origin(0%, 0%);
+        left: 0;
+        width: @touchLateralHeight;
+        height: @touchLateralWidth;
+        top: (@searchHeight+@touchLateralHeight);
+        line-height: @touchLateralWidth;
+        .rotate(-90deg); 
     }
 
     &.down {
-        right: 0px;
-        left: 0px;
-        top: (@searchHeight+3*@touchHeight);
+        right: @touchLateralWidth;
+        left: @touchLateralWidth;
+        top: (@searchHeight+ @touchLateralHeight - @touchVerticalHeight );
+        height: @touchVerticalHeight;
+        line-height: @touchVerticalHeight;
     }
 
 
     &.play {
+        right: @touchLateralWidth;
+        left: @touchLateralWidth;
+        height: (@touchLateralHeight - 2*@touchVerticalHeight);
+        top: (@searchHeight+@touchVerticalHeight);
+        background: #2ecc71;
+        line-height: (@touchLateralHeight - 2*@touchVerticalHeight);
+    }
+
+    &.settings {
         right: 0px;
         left: 0px;
-        bottom: 50px;
-        background: #2ecc71;
+        bottom: 60px;
+        background: #2c3e50;
+        padding: 15px 30px;
     }
 
     &.escape {
@@ -73,13 +103,6 @@ body {
         left: 0px;
         bottom: 0px;
         background: #e74c3c;
+        padding: 15px 30px;
     }
 }
-
-.swipe-container {
-    position: fixed;
-    bottom: 100px;
-    top: (@searchHeight+4*@touchHeight);
-    right: 0px;
-    left: 0px;
-} 

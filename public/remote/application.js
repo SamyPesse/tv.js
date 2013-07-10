@@ -4,9 +4,8 @@ require([
     "yapp/yapp",
     "yapp/args",
     "vendors/socket.io",
-    "vendors/quo",
     "ressources/imports",
-], function(_, $, yapp, args, io, Quo) {
+], function(_, $, yapp, args, io) {
     // Configure yapp
     yapp.configure(args, {});
 
@@ -18,7 +17,8 @@ require([
             "viewport": "width=device-width, initial-scale=1, maximum-scale=1"
         },
         events: {
-            "click .touch": "sendTouch",
+            "click .touch[data-key]": "sendTouch",
+            "click .touch[data-navigate]": "sendNavigate",
             "keyup .search": "sendSearch"
         },
 
@@ -31,25 +31,6 @@ require([
                 this.socket.emit('remote', 'start');
             }, this));
             return this;
-        },
-
-        finish: function() {
-            var self = this;
-            var r = $$(".swipe-container");
-            r.swipeLeft(function() {
-                self.sendTouch(37);
-            });
-            r.swipeRight(function() {
-                self.sendTouch(39);
-            });
-            r.swipeDown(function() {
-                self.sendTouch(40);
-            });
-            r.swipeUp(function() {
-                self.sendTouch(38);
-            });
-
-            return Application.__super__.finish.apply(this, arguments);
         },
 
         /*
@@ -67,9 +48,21 @@ require([
         /*
          *  Search input change
          */
+        sendNavigate: function(e) {
+            var page = e;
+            if (!_.isString(e)) {
+                e.preventDefault();
+                page = $(e.currentTarget).data("navigate");
+            }
+            this.socket.emit('remote_navigate', page);
+        },
+
+        /*
+         *  Search input change
+         */
         sendSearch: function(e) {
             var q = this.$(".search").val();
-            this.socket.emit('remote_search', q);
+            this.sendNavigate("search/"+q);
         }
     });
 

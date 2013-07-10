@@ -1,0 +1,27 @@
+<div class="section">
+	<h1>Prefered language</h1>
+	<div class="list">
+		<%= view.component("list.options", {
+			options: languages,
+			settings: "language"
+		}, "languages") %>
+	</div>
+</div>
+<div class="section">
+	<h1>Prefered movies search engine</h1>
+	<div class="list">
+		<%= view.component("list.options", {
+			options: searchMovies,
+			settings: "search_movies"
+		}, "search_movies") %>
+	</div>
+</div>
+<div class="section">
+	<h1>Prefered torrent search engine</h1>
+	<div class="list">
+		<%= view.component("list.options", {
+			options: searchTorrents,
+			settings: "search_torrents"
+		}, "search_torrents") %>
+	</div>
+</div>

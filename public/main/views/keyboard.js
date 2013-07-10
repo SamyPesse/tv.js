@@ -31,7 +31,7 @@ define([
             Navigation.bind('left', check(this.selectionLeft));
             Navigation.bind('up', check(this.selectionUp));
             Navigation.bind('down', check(this.selectionDown));
-            Navigation.bind(['enter', 'space'], check(this.actionSelection));
+            Navigation.bind('enter', check(this.actionSelection));
 
             return this;
         },
