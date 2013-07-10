@@ -53,38 +53,7 @@ Or simply run the server without rebuilding the client with :
 ## How to install it on your TV ?
 
 This application has been built and designed to run on a TV screen using a Raspberry Pi.
-
-### Software Stack:
-
-    Raspbian OS – a Debian distro specially made for the rPi
-    NodeJs
-    tv.js
-    ffmpeg
-    Chromium Browser
-
-### Steps :
-
-#### 1. Install Raspbian & NodeJs
-
-Follow [this tutorial](http://blog.rueedlinger.ch/2013/03/raspberry-pi-and-nodejs-basic-setup/) to install Raspbian and Node Js on your Raspberry Pi
-
-#### 2. Install Chromium
-
-    sudo apt-get install chromium-browser
-    sudo apt-get install ttf-mscorefonts-installer
-
-#### 3. Install tv.js
-
-    export DISPLAY=:0.0
-    git clone https://github.com/SamyPesse/tv.js.git && cd tv.js
-    rake install
-
-#### 4. Build and run tv.js
-
-    rake build
-    rake run
-    chromium --kiosk http://localhost:8888
-
+Follow [this tutorial](https://github.com/SamyPesse/tv.js/blob/master/rapsberrypi/README.md) to install TV.js on your Rapsberry Pi
 
 ## How to install ffmpeg ?
 
