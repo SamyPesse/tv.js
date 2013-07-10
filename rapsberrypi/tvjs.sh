@@ -17,12 +17,15 @@ update)
 	sudo -u $USER cd $TVJS_DIR
 	sudo -u $USER $RAKE install > $OUT 2>$OUT &
 	sudo -u $USER $RAKE build > $OUT 2>$OUT &
+	;;
 
 start)
 	echo "starting tv.js: $TVJS_DIR"
 	unclutter -display :0 -noevents -grab
 	sudo -u $USER cd $TVJS_DIR
 	sudo -u $USER $RAKE run > $OUT 2>$OUT &
+	export DISPLAY=:0.0
+	chromium --kiosk http://localhost:8888
 	;;
 
 stop)

@@ -96,6 +96,10 @@ If you’re using SSH to connect to your RaspberryPi you should first add “DIS
 
 	export DISPLAY=:0.0	
 	
+You can hide in the mouse in the window environment using : unclutter
+
+	sudo apt-get install unclutter	
+	unclutter -display :0 -noevents -grab
 
 Start chromium in kiosk mode :
 
