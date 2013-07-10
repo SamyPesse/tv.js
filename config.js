@@ -3,5 +3,5 @@ module.exports =  {
 	port: process.env.PORT || 8888,
 
 	/* Debug mode */
-	"debug": true,
+	debug: true,
 };
