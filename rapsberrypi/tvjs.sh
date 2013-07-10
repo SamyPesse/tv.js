@@ -21,10 +21,10 @@ update)
 
 start)
 	echo "starting tv.js: $TVJS_DIR"
-	unclutter -display :0 -noevents -grab
-	sudo -u $USER cd $TVJS_DIR
+	cd $TVJS_DIR
 	sudo -u $USER $RAKE run > $OUT 2>$OUT &
 	export DISPLAY=:0.0
+	unclutter -display :0 -noevents -grab
 	chromium --kiosk http://localhost:8888
 	;;
 
