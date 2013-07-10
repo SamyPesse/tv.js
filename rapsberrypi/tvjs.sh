@@ -25,6 +25,7 @@ start)
 	cd $TVJS_DIR
 	rake run > $OUT 2>$OUT &
 	export DISPLAY=:0.0
+	echo "opening chromium on tv.js"
 	chromium --kiosk http://localhost:8888
 	;;
 

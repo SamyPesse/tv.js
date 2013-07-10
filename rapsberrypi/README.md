@@ -74,7 +74,7 @@ After that, rconnect with ssh to the rapsberry ip.
 	sudo apt-get install chromium-browser
 	sudo apt-get install ttf-mscorefonts-installer
 
-## 7. Install tv.js
+## 7. Installing tv.js
 
     git clone https://github.com/SamyPesse/tv.js.git && cd tv.js
     rake install
@@ -83,7 +83,16 @@ Installation will failed for yapp.js (because yapp.js currently need to be insta
 
 	sudo -i npm install -g git+https://github.com/FriendCode/yapp.js.git#master
 
-## 8. Build and run tv.js
+## 8. Installing ffmpeg
+
+TV.js need ffmpeg for converting downloaded movies into streams. Simply install ffmpeg using :
+
+	sudo apt-get install ffmpeg
+
+Maybe a better way is to compiled ffmpeg from source and made sure to have --enable-libtheora --enable-libvorbis as configure options.
+
+
+## 9. Build and run tv.js
 
 You can now build the TV.js client and run the server
 
@@ -105,7 +114,7 @@ Start chromium in kiosk mode :
 
     chromium --kiosk http://localhost:8888
 
-## 9. Start TV.js at boot :
+## 10. Start TV.js at boot :
 
 Add the start script to init.d :
 
@@ -118,7 +127,7 @@ Test the script :
 	sudo /etc/init.d/tvjs.sh start
 
 
-## 10. Update TV.js
+## 11. Update TV.js
 
 If you want the latest version of TV.js to run on you Rapsberry Pi, just run :
 
