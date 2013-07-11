@@ -15,15 +15,15 @@ update)
 	mkdir $TVJS_DIR
 	git clone $TVJS_REPO $TVJS_DIR
 	cd $TVJS_DIR
-	rake install > $OUT 2>$OUT &
-	rake build > $OUT 2>$OUT &
+	make install > $OUT 2>$OUT &
+	make build > $OUT 2>$OUT &
 	;;
 
 start)
 	echo "starting tv.js: $TVJS_DIR"
 	su - $USER
 	cd $TVJS_DIR
-	rake run > $OUT 2>$OUT &
+	make run > $OUT 2>$OUT &
 	export DISPLAY=:0.0
 	echo "opening chromium on tv.js"
 	chromium --kiosk http://localhost:8888

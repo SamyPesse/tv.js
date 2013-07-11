@@ -15,7 +15,9 @@
         "fluent-ffmpeg": "1.5.2",
         "peerflix": "~0.1.0",
 
-        "readable-stream": "1.0.2"
+        "readable-stream": "1.0.2",
+
+        "yapp": "git://github.com/FriendCode/yapp.js#master"
     },
     "engines": {
         "node": "0.8.x",
