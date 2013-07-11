@@ -58,7 +58,7 @@ Add the following lines to the configuration file before the ‘export’ comman
 	export PATH
 	...
 
-Yo need now to logout and log in again, so that the changed path variable will work. So we are going to reboot :
+You now need to logout and log in again, so that the changed path variable will work. So we are going to reboot :
 
 	sudo shutdown -r now
 
@@ -72,19 +72,19 @@ After that, rconnect with ssh to the raspberry ip.
 ## 6. Installing tv.js
 
     git clone https://github.com/SamyPesse/tv.js.git && cd tv.js
-    rake install
+    make install
 
-Installation will failed for yapp.js (because yapp.js currently need to be installed in global), so just install it with :
+Installation will fail for yapp.js (because yapp.js currently need to be installed in global), so just install it with :
 
 	sudo -i npm install -g git+https://github.com/FriendCode/yapp.js.git#master
 
 ## 7. Installing ffmpeg
 
-TV.js need ffmpeg for converting downloaded movies into streams. Simply install ffmpeg using :
+TV.js needs ffmpeg for converting downloaded movies into streams. Simply install ffmpeg using :
 
 	sudo apt-get install ffmpeg
 
-Maybe a better way is to compiled ffmpeg from source and made sure to have --enable-libtheora --enable-libvorbis as configure options.
+Maybe a better way is to compile ffmpeg from source and make sure to have --enable-libtheora --enable-libvorbis as configure options.
 
 
 ## 8. Build and run tv.js
@@ -94,13 +94,13 @@ You can now build the TV.js client and run the server
     make build
     make run
 
-Be sure that you are in the window environment, if no, enable the boot on the desktop in raspi-config
+Be sure that you are in the window environment, if not, enable the boot on the desktop in raspi-config
 
 If you’re using SSH to connect to your RaspberryPi you should first add “DISPLAY=:0.0″ to your env variables, by simply executing
 
 	export DISPLAY=:0.0	
 	
-You can hide in the mouse in the window environment using : unclutter
+You can hide the mouse in the window environment using: unclutter
 
 	sudo apt-get install unclutter	
 	unclutter -display :0 -noevents -grab
