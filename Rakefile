@@ -33,12 +33,13 @@ task :install do
     check 'npm', 'NPM', 'https://npmjs.org/'
     system 'npm install .'
 
+    runner = run_exec("npm").chomp
     # Install YappJS os specfic
     case os()
     when :macosx
-        system 'npm install -g git+https://github.com/FriendCode/yapp.js.git#master'
+        system "#{runner} install -g git+https://github.com/FriendCode/yapp.js.git#master"
     when :linux || :unix
-        system 'sudo -H npm install -g git+https://github.com/FriendCode/yapp.js.git#master'
+        system "sudo -H #{runner} install -g git+https://github.com/FriendCode/yapp.js.git#master"
     end
 end
 
@@ -49,6 +50,10 @@ task :run do
 end
 
 task :default => ['build', 'run']
+
+def run_exec(exec)
+  `which #{exec}`
+end
 
 # Check for the existence of an executable.
 def check(exec, name, url)
