@@ -36,6 +36,7 @@ To build and run the app, you'll need :
     node
     make
     ffmpeg
+	homebrew
 
 
 To build and run the all :
@@ -60,6 +61,8 @@ Follow [this tutorial](https://github.com/SamyPesse/tv.js/blob/master/raspberryp
 tv.js needs ffmpeg to convert the videos to ogv, make sure you have ffmpeg installed with the necessary codecs.
 
 #### Mac OS X :
+
+	ruby <(curl -fsSk https://raw.github.com/mxcl/homebrew/go)
 
     brew install ffmpeg --with-fdk-aac --with-ffplay --with-freetype --with-frei0r --with-libass --with-libvo-aacenc --with-libvorbis --with-libvpx --with-opencore-amr --with-openjpeg --with-opus --with-rtmpdump --with-schroedinger --with-speex --with-theora --with-tools
 
