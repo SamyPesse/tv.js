@@ -32,6 +32,12 @@
             "email": "aaron.omullan@gmail.com"
         }
     ],
+    "licenses" : [
+        {
+            "type" : "Apache",
+            "url" : "https://github.com/SamyPesse/tv.js/blob/master/LICENSE"
+        }
+    ],
 
     "main": "http://localhost:8888",
     "node-main": "bin/run.js",
