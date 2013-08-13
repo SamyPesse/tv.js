@@ -2,6 +2,7 @@ tv.js : Apple TV for Torrent Streaming
 ====
 
 [![Screen](https://raw.github.com/SamyPesse/movies/master/screens/2.png)](https://raw.github.com/SamyPesse/movies/master/screens/2b.png)
+[![Code Now](https://friendco.de/widgets/image/codenow?url=https%3A%2F%2Fgithub.com%2FSamyPesse%2Ftv.js.git)](https://friendco.de/widgets/url/codenow?url=https%3A%2F%2Fgithub.com%2FSamyPesse%2Ftv.js.git)
 
 A Smart TV application to stream movies using BitTorrent. (Yes it actually streams them in order even though it's BitTorrent)
 
