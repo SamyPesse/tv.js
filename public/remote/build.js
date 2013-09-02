@@ -22,7 +22,7 @@ exports.config = {
 
     // Static files
     "static": {
-        "templates": path.resolve(__dirname, "ressources", "templates"),
+        "templates": path.resolve(__dirname, "resources", "templates"),
     },
 
     // Stylesheets

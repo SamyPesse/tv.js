@@ -3,7 +3,7 @@ define([
 ], function(yapp) {
 
     // Define loader for templates
-    yapp.Ressources.addNamespace("templates", {
+    yapp.Resources.addNamespace("templates", {
         loader: "http",
         base: "templates"
     });

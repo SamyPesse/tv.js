@@ -4,7 +4,7 @@ require([
     "yapp/yapp",
     "yapp/args",
     "vendors/socket.io",
-    "ressources/imports",
+    "resources/imports",
 ], function(_, $, yapp, args, io) {
     // Configure yapp
     yapp.configure(args, {});

@@ -10,13 +10,13 @@ require([
     "views/pages",
 
     "views/imports",
-    "ressources/imports",
+    "resources/imports",
 ], function(_, yapp, args, Navigation, TV, Updates, pages) {
     // Configure yapp
     yapp.configure(args, {
          "logLevels": {
             "requests": "error",
-            "ressources": "error",
+            "resources": "error",
         },
     });
 
