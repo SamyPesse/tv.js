@@ -1,7 +1,7 @@
 SHELL = bash
 NODE = $(shell which node)
 NPM = $(shell which npm)
-YAPP = node_modules/yapp/bin/yapp.js
+YAPP = node_modules/yapp.js/bin/yapp.js
 
 .PHONY: all
 
