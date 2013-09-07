@@ -17,7 +17,7 @@
 
         "readable-stream": "1.0.2",
 
-        "yapp.js": "0.1.1"
+        "hr.js": "0.1.1"
     },
     "engines": {
         "node": "0.8.x",

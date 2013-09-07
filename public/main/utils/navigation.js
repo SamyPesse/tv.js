@@ -1,9 +1,9 @@
 define([
-    "yapp/yapp",
+    "hr/hr",
     'vendors/mousetrap',
     'utils/tv',
     'utils/updates'
-], function (yapp, Mousetrap, TV, Updates) {
+], function (hr, Mousetrap, TV, Updates) {
     var bindings = {};
 
     Mousetrap.stopCallback= function(e, element, combo) {
@@ -14,7 +14,7 @@ define([
     };
 
 
-    var Navigation = new (yapp.Class.extend({
+    var Navigation = new (hr.Class.extend({
         /*
          *  Initialize the navigation
          */
@@ -51,7 +51,7 @@ define([
                 return;
             }
             if (bindings[keys] == null) {
-                bindings[keys] = new yapp.Class();
+                bindings[keys] = new hr.Class();
                 Mousetrap.bind(keys, function() {
                     bindings[keys].trigger("action");
                 });

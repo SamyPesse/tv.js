@@ -1,26 +1,26 @@
 define([
     "Underscore",
     "jQuery",
-    "yapp/yapp",
+    "hr/hr",
     "models/movie",
     "views/page"
-], function(_, $, yapp, Movie, Page) {
-    var logging = yapp.Logger.addNamespace("movies");
+], function(_, $, hr, Movie, Page) {
+    var logging = hr.Logger.addNamespace("movies");
 
     // Collection
-    var Movies = yapp.Collection.extend({
+    var Movies = hr.Collection.extend({
         model: Movie,
         defaults: _.defaults({
             loader: "recents",
             loaderArgs: [],
             limit: 10
-        }, yapp.Collection.prototype.defaults),
+        }, hr.Collection.prototype.defaults),
 
         /*
          *  Search movies by title, description, ...
          */
         search: function(query) {
-            return yapp.Requests.getJSON("/api/movies/search/"+encodeURIComponent(query)).done(_.bind(function(data) {
+            return hr.Requests.getJSON("/api/movies/search/"+encodeURIComponent(query)).done(_.bind(function(data) {
                 this.add(data);
             }, this));
         },
@@ -29,7 +29,7 @@ define([
          *  Return recents movies played by user
          */
         recents: function() {
-            var moviesdata = yapp.Storage.get("movies:recents") || [];
+            var moviesdata = hr.Storage.get("movies:recents") || [];
             this.add({
                 list: moviesdata,
                 n: _.size(moviesdata)
@@ -65,7 +65,7 @@ define([
         Item: MovieItem,
         defaults: _.defaults({
             loadAtInit: false
-        }, yapp.List.prototype.defaults),
+        }, hr.List.prototype.defaults),
 
         initialize: function() {
             MoviesList.__super__.initialize.apply(this, arguments);
@@ -91,7 +91,7 @@ define([
         },
     });
 
-    yapp.View.Template.registerComponent("list.movies", MoviesList);
+    hr.View.Template.registerComponent("list.movies", MoviesList);
 
     return MoviesList;
 });

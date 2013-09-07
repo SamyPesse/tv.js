@@ -1,9 +1,9 @@
 define([
     "Underscore",
     "jQuery",
-    "yapp/yapp",
+    "hr/hr",
     "views/page"
-], function(_, $, yapp, Page) {
+], function(_, $, hr, Page) {
     
     /*
      *  This page shows a list of movies

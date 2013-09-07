@@ -1,7 +1,7 @@
 define([
-    "yapp/yapp"
-], function (yapp) {
-    var Settings = new (yapp.Class.extend({
+    "hr/hr"
+], function (hr) {
+    var Settings = new (hr.Class.extend({
         enabled: true,
         defaults: {
             "language": "en",
@@ -13,14 +13,14 @@ define([
          *  Get a settings value
          */
         get: function(key) {
-            return yapp.Storage.get("settings_"+key) || this.defaults[key];
+            return hr.Storage.get("settings_"+key) || this.defaults[key];
         },
 
         /*
          *  Set a settings
          */
         set: function(key, value) {
-            yapp.Storage.set("settings_"+key, value);
+            hr.Storage.set("settings_"+key, value);
             this.trigger("change:"+key, value);
         }
     }));

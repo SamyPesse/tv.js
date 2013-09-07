@@ -1,13 +1,13 @@
 define([
     "Underscore",
     "jQuery",
-    "yapp/yapp",
+    "hr/hr",
     "utils/navigation"
-], function(_, $, yapp, Navigation) {
-    var logging = yapp.Logger.addNamespace("page");
+], function(_, $, hr, Navigation) {
+    var logging = hr.Logger.addNamespace("page");
 
     // Navigation page
-    var Page = yapp.View.extend({
+    var Page = hr.View.extend({
         className: "page",
         template: "page.html",
         events: {},
@@ -159,7 +159,7 @@ define([
     });
 
     // In-page list element
-    var PageListItem = yapp.List.Item.extend({
+    var PageListItem = hr.List.Item.extend({
         events: {
             "click": "select",
         },
@@ -202,7 +202,7 @@ define([
     });
 
     // In-page list
-    Page.List = yapp.List.extend({
+    Page.List = hr.List.extend({
         Item: PageListItem,
 
         /* Unselect all the items */

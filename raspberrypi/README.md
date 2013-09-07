@@ -74,9 +74,9 @@ After that, rconnect with ssh to the raspberry ip.
     git clone https://github.com/SamyPesse/tv.js.git && cd tv.js
     make install
 
-Installation will fail for yapp.js (because yapp.js currently need to be installed in global), so just install it with :
+Installation will fail for hr.js (because hr.js currently need to be installed in global), so just install it with :
 
-	sudo -i npm install -g git+https://github.com/FriendCode/yapp.js.git#master
+	sudo -i npm install -g git+https://github.com/FriendCode/hr.js.git#master
 
 ## 7. Installing ffmpeg
 

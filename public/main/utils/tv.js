@@ -1,7 +1,7 @@
 define([
-    "yapp/yapp"
-], function (yapp) {
-    var TV = new (yapp.Class.extend({
+    "hr/hr"
+], function (hr) {
+    var TV = new (hr.Class.extend({
         enabled: true,
 
         /*

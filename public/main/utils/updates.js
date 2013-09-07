@@ -1,10 +1,10 @@
 define([
     "Underscore",
-    "yapp/yapp",
+    "hr/hr",
     "vendors/socket.io"
-], function(_, yapp, io) {
-    var logging = yapp.Logger.addNamespace("updates");
-    var Updates = new (yapp.Class.extend({
+], function(_, hr, io) {
+    var logging = hr.Logger.addNamespace("updates");
+    var Updates = new (hr.Class.extend({
         /* Constructor */
         initialize: function() {
             this.url = [window.location.protocol, '//', window.location.host].join('');
@@ -33,7 +33,7 @@ define([
             this.socket.on('remote_navigate', _.bind(function(page) {
                 logging.log("remote navigate ", page);
                 this.trigger("remote:search", page);
-                yapp.History.navigate(page);
+                hr.History.navigate(page);
             }, this));
 
             // Connexion error

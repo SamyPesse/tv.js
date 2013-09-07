@@ -1,16 +1,16 @@
 require([
     "Underscore",
     "jQuery",
-    "yapp/yapp",
-    "yapp/args",
+    "hr/hr",
+    "hr/args",
     "vendors/socket.io",
     "resources/imports",
-], function(_, $, yapp, args, io) {
-    // Configure yapp
-    yapp.configure(args, {});
+], function(_, $, hr, args, io) {
+    // Configure hr
+    hr.configure(args, {});
 
     // Define base application
-    var Application = yapp.Application.extend({
+    var Application = hr.Application.extend({
         name: "Remote",
         template: "main.html",
         metas: {

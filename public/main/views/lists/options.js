@@ -1,19 +1,19 @@
 define([
     "Underscore",
     "jQuery",
-    "yapp/yapp",
+    "hr/hr",
     "utils/settings",
     "views/page"
-], function(_, $, yapp, Settings, Page) {
-    var logging = yapp.Logger.addNamespace("optionss");
+], function(_, $, hr, Settings, Page) {
+    var logging = hr.Logger.addNamespace("optionss");
 
     // Collection
-    var Options = yapp.Collection.extend({
+    var Options = hr.Collection.extend({
         defaults: _.defaults({
             loader: "get",
             loaderArgs: [],
             limit: 1000
-        }, yapp.Collection.prototype.defaults),
+        }, hr.Collection.prototype.defaults),
         /*
          *  Return recents movies played by user
          */
@@ -65,7 +65,7 @@ define([
             loadAtInit: false,
             options: [],    // options list
             settings: null // settings key
-        }, yapp.List.prototype.defaults),
+        }, hr.List.prototype.defaults),
 
         initialize: function() {
             OptionsList.__super__.initialize.apply(this, arguments);
@@ -74,7 +74,7 @@ define([
         },
     });
 
-    yapp.View.Template.registerComponent("list.options", OptionsList);
+    hr.View.Template.registerComponent("list.options", OptionsList);
 
     return OptionsList;
 });

@@ -1,15 +1,15 @@
 SHELL = bash
 NODE = $(shell which node)
 NPM = $(shell which npm)
-YAPP = node_modules/yapp/bin/yapp.js
+HR = node_modules/hr.js/bin/hr.js
 
 .PHONY: all
 
 all: build run
 
 build:
-	$(YAPP) -d public/main build
-	$(YAPP) -d public/remote build
+	$(HR) -d public/main build
+	$(HR) -d public/remote build
 
 install:
 ifeq ($(NPM),)

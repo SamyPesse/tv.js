@@ -1,12 +1,12 @@
 define([
     "Underscore",
     "jQuery",
-    "yapp/yapp",
+    "hr/hr",
     "vendors/video",
     "utils/updates",
     "views/page"
-], function(_, $, yapp, $video, Updates, Page) {
-    var logging = yapp.Logger.addNamespace("player");
+], function(_, $, hr, $video, Updates, Page) {
+    var logging = hr.Logger.addNamespace("player");
 
     var toHHMMSS = function (sec_num) {
         sec_num = Math.floor(sec_num);
@@ -130,7 +130,7 @@ define([
         /* Run streaming */
         runStream: function(movieid) {
             return this.stopStreaming().always(function() {
-                return yapp.Requests.getJSON("/api/movie/play/"+movieid);
+                return hr.Requests.getJSON("/api/movie/play/"+movieid);
             });  
         },
 
@@ -182,7 +182,7 @@ define([
         /* Stop streaming */
         stopStreaming: function() {
             this.pause();
-            return yapp.Requests.getJSON("/api/movie/stop");
+            return hr.Requests.getJSON("/api/movie/stop");
         },
 
         /* Play/Pause the video */

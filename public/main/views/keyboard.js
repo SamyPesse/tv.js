@@ -1,14 +1,14 @@
 define([
     "Underscore",
     "jQuery",
-    "yapp/yapp",
+    "hr/hr",
     "utils/navigation",
     "utils/tv"
-], function(_, $, yapp, Navigation, TV) {
-    var logging = yapp.Logger.addNamespace("keyboard");
+], function(_, $, hr, Navigation, TV) {
+    var logging = hr.Logger.addNamespace("keyboard");
 
     // List Item View
-    var Keyboard = yapp.View.extend({
+    var Keyboard = hr.View.extend({
         className: "keyboard",
         template: "keyboard.html",
         events: {
@@ -147,7 +147,7 @@ define([
         },
     });
 
-    yapp.View.Template.registerComponent("keyboard", Keyboard);
+    hr.View.Template.registerComponent("keyboard", Keyboard);
 
     return Keyboard;
 });

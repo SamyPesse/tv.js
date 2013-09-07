@@ -1,9 +1,9 @@
 define([
-    "yapp/yapp",
-], function(yapp) {
+    "hr/hr",
+], function(hr) {
 
     // Define loader for templates
-    yapp.Resources.addNamespace("templates", {
+    hr.Resources.addNamespace("templates", {
         loader: "http",
         base: "templates"
     });

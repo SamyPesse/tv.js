@@ -1,7 +1,7 @@
 require([
     "Underscore",
-    "yapp/yapp",
-    "yapp/args",
+    "hr/hr",
+    "hr/args",
 
     "utils/navigation",
     "utils/tv",
@@ -11,9 +11,9 @@ require([
 
     "views/imports",
     "resources/imports",
-], function(_, yapp, args, Navigation, TV, Updates, pages) {
-    // Configure yapp
-    yapp.configure(args, {
+], function(_, hr, args, Navigation, TV, Updates, pages) {
+    // Configure hr
+    hr.configure(args, {
          "logLevels": {
             "requests": "error",
             "resources": "error",
@@ -21,14 +21,14 @@ require([
     });
 
     // Define base application
-    var Application = yapp.Application.extend({
+    var Application = hr.Application.extend({
         name: "tv.js",
         template: "main.html",
         metas: {
             "viewport": "width=device-width, initial-scale=1, maximum-scale=1"
         },
         links: {
-            "icon": yapp.Urls.static("images/logo_48.png")
+            "icon": hr.Urls.static("images/logo_48.png")
         },
         routes: {
             "*actions": "errorPage"
@@ -71,7 +71,7 @@ require([
             }, this);
 
             // Get TV ip
-            yapp.Requests.getJSON("/api/ip").done(_.bind(function(data) {
+            hr.Requests.getJSON("/api/ip").done(_.bind(function(data) {
                 this.$(".intro .ip").text(data.ip+":"+data.port);
             }, this));
 
@@ -141,7 +141,7 @@ require([
          *  Page changes
          */
         errorPage: function() {
-            yapp.History.navigate("home");
+            hr.History.navigate("home");
         },
 
         /*
@@ -218,7 +218,7 @@ require([
          */
         exit: function(e) {
             if (e != null) e.preventDefault();
-            yapp.Requests.post("/api/exit")
+            hr.Requests.post("/api/exit")
             window.close();
         },
     });
